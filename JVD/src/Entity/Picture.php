@@ -34,6 +34,11 @@ class Picture
     private $date;
 
     /**
+     * @ORM\Column(type="string",length=255)
+     */
+    private $image;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $description;
@@ -110,6 +115,22 @@ class Picture
         $this->date = $date;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 
     public function getDescription(): ?string
