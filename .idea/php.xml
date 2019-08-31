@@ -65,6 +65,11 @@
       <path value="$PROJECT_DIR$/JVD/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/JVD/vendor/symfony/process" />
       <path value="$PROJECT_DIR$/JVD/vendor/symfony/web-server-bundle" />
+      <path value="$PROJECT_DIR$/JVD/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/templating" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/translation-contracts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
