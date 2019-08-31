@@ -14,12 +14,9 @@ class PictureType extends AbstractType
         $builder
             ->add('name')
             ->add('title')
-            ->add('date')
             ->add('description')
-            ->add('user')
-            ->add('tag')
-            ->add('album')
-        ;
+            ->add('image')
+            ->add('tag');
     }
 
     public function configureOptions(OptionsResolver $resolver)
