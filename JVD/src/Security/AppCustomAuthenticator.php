@@ -45,13 +45,13 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
     // public function getCredentials(Request $request)
     // {
     //     $credentials = [
-    //         'screenName' => $request->request->get('screenName'),
+    //         'username' => $request->request->get('username'),
     //         'password' => $request->request->get('password'),
     //         'csrf_token' => $request->request->get('_csrf_token'),
     //     ];
     //     $request->getSession()->set(
     //         Security::LAST_USERNAME,
-    //         $credentials['screenName']
+    //         $credentials['username']
     //     );
     //
     //     return $credentials;
@@ -64,7 +64,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
     //         throw new InvalidCsrfTokenException();
     //     }
     //
-    //     $user = $this->entityManager->getRepository(User::class)->findOneBy(['screenName' => $credentials['screenName']]);
+    //     $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);
     //
     //     if (!$user) {
     //         // fail authentication with a custom error
@@ -116,20 +116,20 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
    }    public function getCredentials(Request $request)
    {
        $credentials = [
-           'screenName' => $request->request->get('screenName'),
+           'username' => $request->request->get('username'),
            'password' => $request->request->get('password'),
            'csrf_token' => $request->request->get('_csrf_token'),
        ];
        $request->getSession()->set(
            Security::LAST_USERNAME,
-           $credentials['screenName']
+           $credentials['username']
        );        return $credentials;
    }    public function getUser($credentials, UserProviderInterface $userProvider)
    {
        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
        if (!$this->csrfTokenManager->isTokenValid($token)) {
            throw new InvalidCsrfTokenException();
-       }        $user = $this->entityManager->getRepository(User::class)->findOneBy(['screenName' => $credentials['screenName']]);        if (!$user) {
+       }        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);        if (!$user) {
            // fail authentication with a custom error
            throw new CustomUserMessageAuthenticationException('screen Name could not be found.');
        }        return $user;
@@ -137,8 +137,8 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
    {
        // Check the user's password or other credentials and return true or false
        // If there are no credentials to check, you can just return true
-       if ($user->getIsValidate() == 0) {
-         $this->sessionI->getFlashBag()->add('notValidate','Vous devez valider votre inscription!');
+       if ($user->getIsValidated() == 0) {
+         $this->sessionI->getFlashBag()->add('notValidated','Vous devez valider votre inscription!');
          return $this->urlGenerator->generate('app_login');
 
          // code...

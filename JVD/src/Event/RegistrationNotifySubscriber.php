@@ -46,7 +46,7 @@ class RegistrationNotifySubscriber implements EventSubscriberInterface
         $user = $event->getUser();
 
         $subject = "Bienvenue";
-        //$body = "Bievenue ".$user->getScreenName()." Vous pouvez valider votre inscription en allant vers ce lien";
+        //$body = "Bievenue ".$user->getUsername()." Vous pouvez valider votre inscription en allant vers ce lien";
 
         $message = (new \Swift_Message())
             ->setSubject($subject)
