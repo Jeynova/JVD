@@ -8,6 +8,7 @@ use App\Entity\Picture;
 use App\Form\CommentType;
 use App\Form\PictureType;
 use App\Repository\PictureRepository;
+use App\Service\FileUploader;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,27 +30,27 @@ class PictureController extends AbstractController
     }
 
     /**
-     * @Route ("/picture/{id}",name="picture_show")
+     * @Route ("/picture/{id}",name="picture_show",requirements={"id":"\d+"})
      */
     public function showPicture(Picture $picture, Request $request, ObjectManager $manager)
     {
-//        $comment = new Comment();
-//        $form = $this->createForm(CommentType::class, $comment);
-//        $form->handleRequest($request);
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $comment->setDate(new \DateTime());
-//            $comment->setPicture($picture);
-//            $comment->setUser($this->getUser());
-//            $manager->persist($comment);
-//            $manager->flush();
-//            return $this->redirectToRoute('picture_show', [
-//                'id' => $picture->getId()
-//            ]);
-//        }
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setDate(new \DateTime());
+            $comment->setPicture($picture);
+            $comment->setUser($this->getUser());
+            $manager->persist($comment);
+            $manager->flush();
+            return $this->redirectToRoute('picture_show', [
+                'id' => $picture->getId()
+            ]);
+        }
         return $this->render('picture/pictureShow.html.twig',
             [
                 'picture' => $picture,
-               // 'formComment' => $form->createView()
+                'formComment' => $form->createView()
             ]);
     }
 
@@ -57,7 +58,7 @@ class PictureController extends AbstractController
      * @Route("/picture/new", name="new_picture")
      * @Route("/picture/{id]/edit",name="edit_picture")
      */
-    public function addPicture(Picture $picture = null, Request $request, ObjectManager $manager)
+    public function addPicture(Picture $picture = null, Request $request, ObjectManager $manager,FileUploader $fileUploader)
     {
         if (!$picture) {
             $picture = new Picture();
@@ -69,16 +70,10 @@ class PictureController extends AbstractController
                 $picture->setDate(new \DateTime());
             }
             $file = $form->get('Image')->getData();
-            $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
-            try {
-                $file->move(
-                    $this->getParameter('images_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
+            if ($file){
+                $imageFile = $fileUploader->upload($file);
+                $picture->setImage($imageFile);
             }
-            $picture->setImage($fileName);
             $picture->setUser($this->getUser());
             $manager->persist($picture);
             $manager->flush();
@@ -108,8 +103,4 @@ class PictureController extends AbstractController
         return $this->redirectToRoute('picture');
     }
 
-    private function generateUniqueFileName()
-    {
-        return md5(uniqid());
-    }
 }

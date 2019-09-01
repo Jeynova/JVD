@@ -75,6 +75,15 @@
       <path value="$PROJECT_DIR$/JVD/vendor/symfony/form" />
       <path value="$PROJECT_DIR$/JVD/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/JVD/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/profiler-pack" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/apache-pack" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/web-profiler-bundle" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/security" />
+      <path value="$PROJECT_DIR$/JVD/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/JVD/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/JVD/vendor/sensio/framework-extra-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
