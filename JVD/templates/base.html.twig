@@ -25,18 +25,12 @@
     <body>
 
       <body>
-        
+
         {% include "navbar.html.twig" %}
-        
-        <main >
-          {% block body %}{% endblock %}
-        </main>
-        
-        {% block javascripts %}
-          <script>
-            
-          </script>
-        {% endblock %}
+
+
+
+
 
       <style media="screen">
       /* Add a black background color to the top navigation */
@@ -77,8 +71,14 @@
    <a href="#categories">Categories</a>
    <a href="#about" style="float:right">About</a>
  </div>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+ <main >
+   {% block body %}{% endblock %}
+ </main>
+ {% block javascripts %}
+   <script>
+
+   </script>
+ {% endblock %}
 
     </body>
 </html>

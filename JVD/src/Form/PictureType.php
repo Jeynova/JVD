@@ -33,8 +33,8 @@ class PictureType extends AbstractType
                     ])
                 ],
             ])
-            ->add('tag')
-            ->add('save', SubmitType::class);
+            ->add('tag');
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
