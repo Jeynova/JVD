@@ -9,10 +9,43 @@
               width: 80%;
               margin: auto
             }
-
-            .dropdown-trigger:hover {
+            .dropdown-trigger {
               display: block
             }
+            .dropdown-trigger:hover {
+              display: block
+            }      
+            .nav-wrapper form{
+              width: 40%;
+            }
+            
+            .brand-logo {
+              position: relative!important;
+            }
+
+            #bar div.nav-wrapper {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between
+            }
+
+            #bar ul {
+              float: none;
+            }
+            .black {
+              color: black!important
+            }
+            a#close-search {
+              position: absolute!important;
+              top: 0!important;
+              right: 1rem!important;
+              color: transparent!important;
+              cursor: pointer!important;
+              font-size: 2rem!important;
+              -webkit-transition: .3s color!important;
+              transition: .3s color!important;
+            }
+            
           </style>
         {% endblock %}
         <!-- Compiled and minified CSS -->
@@ -23,8 +56,6 @@
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     </head>
     <body>
-
-      <body>
         
         {% include "navbar.html.twig" %}
         
@@ -38,47 +69,6 @@
           </script>
         {% endblock %}
 
-      <style media="screen">
-      /* Add a black background color to the top navigation */
-  .topnav {
-    background-color: #333;
-    overflow: hidden;
-  }
-
-  /* Style the links inside the navigation bar */
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #4CAF50;
-    color: black;
-  }
-
-  .topnav a {
-  border-right: 1px solid #bbb;
-}
-
-.topnav a:last-child {
-  border-right: none;
-}
-      </style>
-      <div class="topnav">
-   <a href="{{ path('home') }}">Home</a>
-   <a href="#user">User</a>
-   <a href="{{path('picture')}}">Pictures</a>
-   <a href="#tags">Tags</a>
-   <a href="#categories">Categories</a>
-   <a href="#about" style="float:right">About</a>
- </div>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
 
     </body>
 </html>
