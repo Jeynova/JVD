@@ -56,13 +56,14 @@ class PictureController extends AbstractController
 
     /**
      * @Route("/picture/new", name="new_picture")
-     * @Route("/picture/{id]/edit",name="edit_picture")
+     * @Route("/picture/{id}/edit",name="edit_picture")
      */
     public function addPicture(Picture $picture = null, Request $request, ObjectManager $manager,FileUploader $fileUploader)
     {
         if (!$picture) {
             $picture = new Picture();
         }
+
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

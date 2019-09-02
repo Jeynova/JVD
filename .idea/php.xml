@@ -84,6 +84,7 @@
       <path value="$PROJECT_DIR$/JVD/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/JVD/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/JVD/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/JVD/vendor/symfony/asset" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
