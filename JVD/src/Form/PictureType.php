@@ -40,15 +40,15 @@ class PictureType extends AbstractType
                     ])
                 ],
             ])
-            ->add('tag', EntityType::class, [
-                'class' => Tag::class,
-                'query_builder' => function (TagRepository $tag) {
-                    return $tag->createQueryBuilder('t')
-                        ->orderBy('t.name', 'ASC');
-                },
-
-
-            ])
+//            ->add('tag', EntityType::class, [
+//                'class' => Tag::class,
+//                'query_builder' => function (TagRepository $tag) {
+//                    return $tag->createQueryBuilder('t')
+//                        ->orderBy('t.name', 'ASC');
+//                },
+//
+//
+//            ])
             ->add('save', SubmitType::class);
     }
 
