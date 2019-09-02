@@ -5,13 +5,32 @@
 {% endblock %}
 {% block body %}
 
-    {{ form_start(formPicture) }}
-    {{ form_row(formPicture.title,{'attr':{'placeholder':'Titre de l\'image'}}) }}
-    {{ form_row(formPicture.name,{'attr':{'placeholder':'Nom de l\'image'}}) }}
-    {{ form_row(formPicture.description,{'attr':{'placeholder':'Ajouter du texte a l\'image'}}) }}
-    {{ form_row(formPicture.image,{'attr':{'placeholder':'Ajouter l\'image'}}) }}
-    {{ form_row(formPicture.tag,{'attr':{'placeholder':'Ajouter le tag','class': 'browser-default'}}) }}
-    <button type="submit">
+{{ form_start(formPicture) }}
+
+    <div class="input-field">
+        {{ form_widget(formPicture.title, { 'attr': { 'id': 'title'} }) }}    
+        {{ form_label(formPicture.title, 'Title', { 'label_attr': {'for': 'title'} }) }}
+    </div>
+
+    <div class="input-field">
+        {{ form_widget(formPicture.name, { 'attr': { 'id': 'name'} }) }}    
+        {{ form_label(formPicture.name, 'Img name', { 'label_attr': {'for': 'name'} }) }}
+    </div>
+    <div class="input-field">
+        {{ form_widget(formPicture.description, { 'attr': { 'id': 'description'} }) }}    
+        {{ form_label(formPicture.description, 'Description', { 'label_attr': {'for': 'description'} }) }}
+    </div>
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>Pict</span>
+            <input type="file" id="picture_image" name="picture[image]">
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
+    </div>
+    <div class="chips chips-placeholder" id="picture_tag" name="picture[tag]"></div>
+    <button class="btn" type="submit">
         {% if editMode %}
             Modifier
         {% else %}
@@ -20,4 +39,13 @@
     </button>
 
     {{ form_end(formPicture) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.chips');
+        var instances = M.Chips.init(elems, { placeholder: "Enter a Tag", secondaryPlaceholder: "+Tag"});
+        });
+    </script>
 {% endblock %}

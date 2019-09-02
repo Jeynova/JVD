@@ -24,32 +24,7 @@ class PictureType extends AbstractType
         $builder
             ->add('name')
             ->add('title')
-            ->add('description')
-            ->add('image', FileType::class, [
-                'label' => 'Image',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '10000k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'S\'il vous plait veuillez mettre un image valide',
-                    ])
-                ],
-            ])
-            ->add('tag', EntityType::class, [
-                'class' => Tag::class,
-                'query_builder' => function (TagRepository $tag) {
-                    return $tag->createQueryBuilder('t')
-                        ->orderBy('t.name', 'ASC');
-                },
-
-
-            ])
-            ->add('save', SubmitType::class);
+            ->add('description');
     }
 
     public function configureOptions(OptionsResolver $resolver)
