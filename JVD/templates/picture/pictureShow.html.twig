@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col s12 m6">
+            <img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.name }}">
+        </div>
+        <div class="col s12 m6">
+            <div class="userInfo"></div>
+            <div class="postInfo"></div>
+        </div>
+    </div>
+{% endblock %}
