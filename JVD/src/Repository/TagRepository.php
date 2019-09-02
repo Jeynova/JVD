@@ -22,19 +22,16 @@ class TagRepository extends ServiceEntityRepository
     // /**
     //  * @return Tag[] Returns an array of Tag objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByTag()
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('t.name', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Tag

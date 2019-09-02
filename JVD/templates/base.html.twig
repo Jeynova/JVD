@@ -9,10 +9,43 @@
               width: 80%;
               margin: auto
             }
-
-            .dropdown-trigger:hover {
+            .dropdown-trigger {
               display: block
             }
+            .dropdown-trigger:hover {
+              display: block
+            }      
+            .nav-wrapper form{
+              width: 40%;
+            }
+            
+            .brand-logo {
+              position: relative!important;
+            }
+
+            #bar div.nav-wrapper {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between
+            }
+
+            #bar ul {
+              float: none;
+            }
+            .black {
+              color: black!important
+            }
+            a#close-search {
+              position: absolute!important;
+              top: 0!important;
+              right: 1rem!important;
+              color: transparent!important;
+              cursor: pointer!important;
+              font-size: 2rem!important;
+              -webkit-transition: .3s color!important;
+              transition: .3s color!important;
+            }
+            
           </style>
         {% endblock %}
         <!-- Compiled and minified CSS -->
@@ -23,6 +56,7 @@
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     </head>
     <body>
+<<<<<<< HEAD
 
       <body>
 
@@ -80,5 +114,20 @@
    </script>
  {% endblock %}
 
+=======
+        
+        {% include "navbar.html.twig" %}
+        
+        <main >
+          {% block body %}{% endblock %}
+        </main>
+        
+        {% block javascripts %}
+          <script>
+
+          </script>
+        {% endblock %}
+
+>>>>>>> 61ec6bc33db31d3a553b8a17e2f4453afe4e1cef
     </body>
 </html>
