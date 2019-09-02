@@ -69,7 +69,7 @@ class PictureController extends AbstractController
             if (!$picture->getId()) {
                 $picture->setDate(new \DateTime());
             }
-            $file = $form->get('Image')->getData();
+            $file = $form->get('image')->getData();
             if ($file){
                 $imageFile = $fileUploader->upload($file);
                 $picture->setImage($imageFile);

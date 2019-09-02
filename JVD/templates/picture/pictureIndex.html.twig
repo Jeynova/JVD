@@ -25,7 +25,7 @@
                 <td>{{ picture.user.id }}</td>
                 <td>{{ picture.name }}</td>
                 <td>{{ picture.title }}</td>
-                <td>{{ picture.date }}</td>
+                <td>{{ picture.date | date('d-m-Y')}}</td>
                 <td>{{ picture.description }}</td>
                 <td><img src="{{ picture.image }}" alt="{{ picture.title }}"></td>
                 <td>

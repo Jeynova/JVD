@@ -54,7 +54,7 @@ class RegistrationController extends AbstractController
         $user->setRoles(array('ROLE_USER'));
         $entityManager->persist($user);
         $entityManager->flush();
-
+        $this->redirectToRoute('app_login');
         // do anything else you need here, like send an email
         $e=new RegisterEvent($user);
         $dispatcher->dispatch($e, RegisterEvent::NAME);
