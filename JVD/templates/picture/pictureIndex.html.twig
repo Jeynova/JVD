@@ -29,7 +29,7 @@
                 <td>{{ picture.description }}</td>
                 <td><img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.title }}"></td>
                 <td>
-                    {#                    <a href="{{ path('show_picture', {'id': picture.id}) }}">show</a>#}
+                    <a href="{{ path('picture_show', {'id': picture.id}) }}">show</a>
                     <a href="{{ path('edit_picture', {'id': picture.id}) }}">edit</a>
                 </td>
             </tr>
