@@ -16,10 +16,7 @@
                     </div>
                     <div class="col s10">
               <span class="black-text">
-                  {% if picture.album %}
-                      {{ picture.user.username }} a enregistré l'image dans {{ picture.user.albums }}
-                  {% endif %}
-
+                  <strong> {{ picture.user.username }}</strong> a posté l'image <strong>{{ picture.title }}</strong>
               </span>
                     </div>
                 </div>
@@ -27,6 +24,10 @@
             <div class="postInfo">
                 <p>{{ picture.description }}</p>
             </div>
+            <div class="form">
+                {{ form(formComment) }}
+            </div>
         </div>
+
     </div>
 {% endblock %}
