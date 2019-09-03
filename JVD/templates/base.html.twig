@@ -48,6 +48,10 @@
             .hidden {
               display: none
             }
+            .inline {
+                display:inline;
+                margin-top: 1.5%
+            }
           </style>
         {% endblock %}
         <!-- Compiled and minified CSS -->
@@ -61,9 +65,9 @@
         
         {% include "navbar.html.twig" %}
         
-       <div style="margin:5%;padding: 0;">
+       <main>
           {% block body %}{% endblock %}
-       </div>
+       </main>
         
         {% block javascripts %}
           <script>
