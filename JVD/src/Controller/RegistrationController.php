@@ -17,9 +17,15 @@ use App\Service\TokenHandle;
 use App\Service\FileUploader;
 
 
+<<<<<<< Updated upstream
 
 
 
+=======
+/**
+* @Route("/register", name="register")
+*/
+>>>>>>> Stashed changes
 class RegistrationController extends AbstractController
 {
 
