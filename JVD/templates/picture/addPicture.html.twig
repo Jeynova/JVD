@@ -6,18 +6,42 @@
 {% block body %}
 
     {{ form_start(formPicture) }}
-    {{ form_row(formPicture.title,{'attr':{'placeholder':'Titre de l\'image'}}) }}
-    {{ form_row(formPicture.name,{'attr':{'placeholder':'Nom de l\'image'}}) }}
-    {{ form_row(formPicture.description,{'attr':{'placeholder':'Ajouter du texte a l\'image'}}) }}
-    {{ form_row(formPicture.image,{'attr':{'placeholder':'Ajouter l\'image'}}) }}
-    <h3>Tags</h3>
-    <ul class="tag">
-        {# iterate over each existing tag and render its only field: name #}
-        {% for tag in formPicture.tag %}
-            <li>{{ form_row(tag.name) }}</li>
-        {% endfor %}
-    </ul>
-    <button type="submit">
+
+    <div class="input-field">
+        {{ form_widget(formPicture.title, { 'attr': { 'id': 'title'} }) }}
+        {{ form_label(formPicture.title, 'Title', { 'label_attr': {'for': 'title'} }) }}
+    </div>
+
+    <div class="input-field">
+        {{ form_widget(formPicture.name, { 'attr': { 'id': 'name'} }) }}
+        {{ form_label(formPicture.name, 'Img name', { 'label_attr': {'for': 'name'} }) }}
+    </div>
+    <div class="input-field">
+        {{ form_widget(formPicture.description, { 'attr': { 'id': 'description'} }) }}
+        {{ form_label(formPicture.description, 'Description', { 'label_attr': {'for': 'description'} }) }}
+    </div>
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>Pict</span>
+            {{ form_widget(formPicture.image, { 'attr': { 'id': 'image'} }) }}
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
+    </div>
+    {% for tag in formPicture.tags %}
+        <div class="inline col s3">
+        <label>
+            {{ form_widget(tag, { 'attr': { 'id': 'tag'} } ) }}
+            <span>{{ form_label(name) }}</span>
+        </label>
+        </div>{% endfor %}
+
+
+
+    {{ form(formPicture) }}
+
+    <button class="btn" type="submit">
         {% if editMode %}
             Modifier
         {% else %}
@@ -25,5 +49,16 @@
         {% endif %}
     </button>
 
-    {{ form_end(formPicture) }}
+    {#    {{ form_end(formPicture) }}#}
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.chips');
+            var instances = M.Chips.init(elems, {placeholder: "Enter A Tag", secondaryPlaceholder: "+Tag"});
+        });
+
+    </script>
 {% endblock %}

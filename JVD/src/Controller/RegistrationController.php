@@ -15,19 +15,20 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Service\TokenHandle;
 use App\Service\FileUploader;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 
-/**
-* @Route("/register", name="app_register")
-*/
+
 class RegistrationController extends AbstractController
 {
 
   /**
-  * @Route("/", name="app_register")
+  * @Route("/register", name="app_register")
   */
   public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppCustomAuthenticator $authenticator,EventDispatcherInterface $dispatcher,TokenHandle $tokenGen,FileUploader $fileUploader): Response
   {
+    $uploadType = FileUploader::UPLOAD_AVATAR;
     $user = new User();
     $form = $this->createForm(RegistrationFormType::class, $user);
     $form->handleRequest($request);
@@ -40,9 +41,12 @@ class RegistrationController extends AbstractController
           )
         );
         //$user->setRoles(["ROLE_USER"]);
+        $name = $form['username']->getData();
         $imageFile = $form['avatar']->getData();
+        //dd($imageFile);
         if ($imageFile) {
-          $imageFileName = $fileUploader->upload($imageFile);
+
+          $imageFileName = $fileUploader->upload($imageFile,$uploadType,$name);
           $user->setAvatar($imageFileName);
       }
         $entityManager = $this->getDoctrine()->getManager();
@@ -60,22 +64,22 @@ class RegistrationController extends AbstractController
         $dispatcher->dispatch($e, RegisterEvent::NAME);
 
 
-        // return $guardHandler->authenticateUserAndHandleSuccess(
-        //   $user,
-        //   $request,
-        //   $authenticator,
-        //   'main' // firewall name in security.yaml
-        // );
+            // return $guardHandler->authenticateUserAndHandleSuccess(
+            //   $user,
+            //   $request,
+            //   $authenticator,
+            //   'main' // firewall name in security.yaml
+            // );
 
-      }
+        }
 
-      return $this->render('registration/index.html.twig', [
-        'registrationForm' => $form->createView(),
-      ]);
+        return $this->render('registration/index.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
     }
     /**
-    * @return string
-    * @throws \Exception
-    */
+     * @return string
+     * @throws \Exception
+     */
 
-  }
+}

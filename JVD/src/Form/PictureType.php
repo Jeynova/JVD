@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use function Sodium\add;
 
 class PictureType extends AbstractType
 {
@@ -40,11 +41,21 @@ class PictureType extends AbstractType
                     ])
                 ],
             ])
-            ->add('tag', CollectionType::class, [
-            'entry_type' => TagType::class,
-            'entry_options' => ['label' => false],
-        ])
-            ->add('save', SubmitType::class);
+
+            ->add('tags', EntityType::class, [ // add this
+                'class' => Tag::class,
+                'expanded' =>true,
+                'multiple' => true,
+            ])
+//            ->add('tags', CollectionType::class, [
+//                'entry_type' => TagType::class,
+//                'entry_options' => ['label' => false],
+//                'allow_add' => true,
+//                'by_reference'=>false
+//            ])
+            ->add('save', SubmitType::class, [
+                'attr' => ['class' => 'save'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

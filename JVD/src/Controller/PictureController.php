@@ -5,9 +5,12 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Picture;
+use App\Entity\Tag;
 use App\Form\CommentType;
 use App\Form\PictureType;
+use App\Form\TagType;
 use App\Repository\PictureRepository;
+use App\Repository\TagRepository;
 use App\Service\FileUploader;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,7 +61,7 @@ class PictureController extends AbstractController
      * @Route("/picture/new", name="new_picture")
      * @Route("/picture/{id}/edit",name="edit_picture")
      */
-    public function addPicture(Picture $picture = null, Request $request, ObjectManager $manager,FileUploader $fileUploader)
+    public function addPicture(TagRepository $tagRepository,Picture $picture = null, Request $request, ObjectManager $manager, FileUploader $fileUploader)
     {
         if (!$picture) {
             $picture = new Picture();
@@ -71,21 +74,22 @@ class PictureController extends AbstractController
                 $picture->setDate(new \DateTime());
             }
             $file = $form->get('image')->getData();
-            if ($file){
+            if ($file) {
                 $imageFile = $fileUploader->upload($file);
                 $picture->setImage($imageFile);
             }
             $picture->setUser($this->getUser());
             $manager->persist($picture);
             $manager->flush();
-
             return $this->redirectToRoute('picture_show', [
                 'id' => $picture->getId()
             ]);
         }
         return $this->render('picture/addPicture.html.twig', [
             'formPicture' => $form->createView(),
-            'editMode' => $picture->getId() !== null
+            'editMode' => $picture->getId() !== null,
+            'tagName' => $tagRepository->findAll()
+
         ]);
     }
 
