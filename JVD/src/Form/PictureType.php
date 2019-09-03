@@ -42,8 +42,12 @@ class PictureType extends AbstractType
             ])
             ->add('tag', CollectionType::class,[
                 'entry_type'=>TagType::class,
-                'entry_options'=>['label'=> 'name']
+                'entry_options'=>['label'=> 'name'],
+                'allow_add' => true,
+                'by_reference' => false,
             ])
+
+            ->add('tag')
             ->add('save', SubmitType::class);
     }
 

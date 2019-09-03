@@ -5,15 +5,7 @@
 {% endblock %}
 {% block body %}
 
-<<<<<<< Updated upstream
-    {{ form_start(formPicture) }}
-    {{ form_row(formPicture.title,{'attr':{'placeholder':'Titre de l\'image'}}) }}
-    {{ form_row(formPicture.name,{'attr':{'placeholder':'Nom de l\'image'}}) }}
-    {{ form_row(formPicture.description,{'attr':{'placeholder':'Ajouter du texte a l\'image'}}) }}
-    {{ form_row(formPicture.image,{'attr':{'placeholder':'Ajouter l\'image'}}) }}
-    {{ form_row(formPicture.tag,{'attr':{'placeholder':'Ajouter le tag','class': 'browser-default'}}) }}
-    <button type="submit">
-=======
+
 {{ form_start(formPicture) }}
 
     <div class="input-field">
@@ -42,7 +34,7 @@
             <input class="custom-class" id="picture_tag" name="picture[tag]">
           </div>
     <button class="btn" type="submit">
->>>>>>> Stashed changes
+
         {% if editMode %}
             Modifier
         {% else %}
