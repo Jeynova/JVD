@@ -10,6 +10,7 @@ use App\Form\CommentType;
 use App\Form\PictureType;
 use App\Form\TagType;
 use App\Repository\PictureRepository;
+use App\Repository\TagRepository;
 use App\Service\FileUploader;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,12 +61,11 @@ class PictureController extends AbstractController
      * @Route("/picture/new", name="new_picture")
      * @Route("/picture/{id}/edit",name="edit_picture")
      */
-    public function addPicture(Picture $picture = null, Request $request, ObjectManager $manager, FileUploader $fileUploader)
+    public function addPicture(TagRepository $tagRepository,Picture $picture = null, Request $request, ObjectManager $manager, FileUploader $fileUploader)
     {
         if (!$picture) {
             $picture = new Picture();
         }
-
 
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
@@ -88,7 +88,8 @@ class PictureController extends AbstractController
         return $this->render('picture/addPicture.html.twig', [
             'formPicture' => $form->createView(),
             'editMode' => $picture->getId() !== null,
-            'formTag' => $formTag->createView()
+            'tagName' => $tagRepository->findAll()
+
         ]);
     }
 

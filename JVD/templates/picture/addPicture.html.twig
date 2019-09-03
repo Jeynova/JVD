@@ -21,22 +21,21 @@
         {{ form_label(formPicture.description, 'Description', { 'label_attr': {'for': 'description'} }) }}
     </div>
     <div class="file-field input-field">
-    <div class="btn">
-        <span>Pict</span>
-        {{ form_widget(formPicture.image, { 'attr': { 'id': 'image'} }) }}
+        <div class="btn">
+            <span>Pict</span>
+            {{ form_widget(formPicture.image, { 'attr': { 'id': 'image'} }) }}
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
     </div>
-    <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-    </div>
-    </div>{% for tag in formPicture.tags %}
-    <div class="inline col s3">
-    <label>
-
-        {{ form_widget(tag, { 'attr': { 'id': 'tag'} } ) }}
-
-        <span>{{tag.name}}</span>
-    </label>
-    </div>{% endfor %}
+    {% for tag in formPicture.tags %}
+        <div class="inline col s3">
+        <label>
+            {{ form_widget(tag, { 'attr': { 'id': 'tag'} } ) }}
+            <span>{{ form_label(name) }}</span>
+        </label>
+        </div>{% endfor %}
 
 
 
