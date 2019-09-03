@@ -23,7 +23,7 @@ class Tag
      */
     private $name;
 
-    private $addTag;
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="tags")
      */
@@ -144,8 +144,12 @@ class Tag
 
         return $this;
     }
+
     public function __toString()
     {
-     return $this->name;
+        if (is_null($this->name)) {
+            return 'NULL';
+        }
+        return $this->name;
     }
 }
