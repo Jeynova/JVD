@@ -5,7 +5,6 @@
 {% block body %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <h1>Welcome {{ app.user.username }}</h1>
-        <a class="link" href="{{ path('app_logout') }}">Logout</a>
     {% else %}
         <h1>Welcome to you !</h1>
     {% endif %}
