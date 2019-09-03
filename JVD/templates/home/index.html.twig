@@ -11,10 +11,12 @@
     {% endif %}
     <div id="columns">
         {% for pict in picture %}
-            <figure>
-                <img src="{{ asset('uploads/images/'~pict.image) }}">
-                <figcaption>{{ pict.title }}</figcaption>
-            </figure>
+
+                <figure>
+                    <a href="{{ path('picture_show', {'id': pict.id}) }}">  <img src="{{ asset('uploads/images/'~pict.image) }}"></a>
+                    <figcaption>{{ pict.title }}</figcaption>
+                </figure>
+
         {% endfor %}
     </div>
 {% endblock %}
@@ -65,6 +67,7 @@
             border: 1px solid lightgrey;
             border-radius: 0 0 50px 50px;
         }
+
         div#columns small {
             font-size: 1rem;
             float: right;

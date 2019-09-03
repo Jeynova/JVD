@@ -17,14 +17,14 @@ use App\Service\TokenHandle;
 use App\Service\FileUploader;
 
 
-/**
-* @Route("/register", name="app_register")
-*/
+
+
+
 class RegistrationController extends AbstractController
 {
 
   /**
-  * @Route("/", name="app_register")
+  * @Route("/register", name="app_register")
   */
   public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppCustomAuthenticator $authenticator,EventDispatcherInterface $dispatcher,TokenHandle $tokenGen,FileUploader $fileUploader): Response
   {
