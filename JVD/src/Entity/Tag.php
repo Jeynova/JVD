@@ -23,6 +23,7 @@ class Tag
      */
     private $name;
 
+    private $addTag;
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="tags")
      */
