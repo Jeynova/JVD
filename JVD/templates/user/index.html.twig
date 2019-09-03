@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My page{% endblock %}
+
+{% block body %}
+{% if app.user %}
+    <h1>Bienvenue {{ app.user.username}}</h1>
+
+    <table>
+        <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for picture in pictures %}
+            <tr>
+
+                <td>{{ picture.name }}</td>
+                <td>{{ picture.title }}</td>
+                <td>{{ picture.date | date('d-m-Y') }}</td>
+                <td>{{ picture.description }}</td>
+                <td><img class="responsive-image" style="max-width:30%"src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.title }}"></td>
+                <td>
+                    <a href="{{ path('picture_show', {'id': picture.id}) }}">show</a>
+                    <a href="{{ path('edit_picture', {'id': picture.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('new_picture') }}">Nouvelle image</a>
+    {% else %}
+    <p>Vous n'etas pas connecte</p>
+    {% endif %}
+{% endblock %}

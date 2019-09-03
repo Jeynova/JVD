@@ -1,13 +1,13 @@
 <nav id='bar' class="deep-purple">
     <div class="nav-wrapper nav-center" style="width: 98%; margin: auto">
     <a href="{{ path("home") }}" class="brand-logo"><i class="material-icons">brightness_medium</i>Pict'ur</a>
-    
+
     <form method="post" id="nav-form">
-        
+
     </form>
-    
+
     <ul>
-        
+
         <li id="nav-search"><a><i class="material-icons">search</i></a></li>
         <li><a href="collapsible.html"><i class="material-icons">favorite</i></a></li>
         <li><a href="{{ path("picture") }}"><i class="material-icons">view_module</i></a></li>
@@ -31,7 +31,7 @@
             <li class="divider" tabindex="-1"></li>
             <li><a href="{{ path("app_logout") }}" class="center"><i class="material-icons" style="float: none; margin: auto; display:inline-block">power_settings_new</i>Logout</a></li>
         </ul>
-            
+
 
       </ul>
     </div>
@@ -78,7 +78,7 @@ function nodark(){
       nodark();
   }
 
-$('#night_mode').change(function(){   
+$('#night_mode').change(function(){
 
     if ($(this).prop('checked'))
     {
