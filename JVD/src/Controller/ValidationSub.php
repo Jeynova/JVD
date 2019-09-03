@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\UserRepository;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 
 class ValidationSub extends AbstractController {
@@ -24,6 +26,7 @@ class ValidationSub extends AbstractController {
       $entityManager = $this->getDoctrine()->getManager();
       $user->setIsValidated(1);
       $user->setMailtoken("");
+      
       $entityManager->persist($user);
       $entityManager->flush();
       return $this->render('validationSub/validationSub.html.twig');

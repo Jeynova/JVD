@@ -17,17 +17,16 @@ use App\Service\TokenHandle;
 use App\Service\FileUploader;
 
 
-/**
-* @Route("/register", name="app_register")
-*/
+
 class RegistrationController extends AbstractController
 {
 
   /**
-  * @Route("/", name="app_register")
+  * @Route("/register", name="app_register")
   */
   public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppCustomAuthenticator $authenticator,EventDispatcherInterface $dispatcher,TokenHandle $tokenGen,FileUploader $fileUploader): Response
   {
+    $uploadType = FileUploader::UPLOAD_AVATAR;
     $user = new User();
     $form = $this->createForm(RegistrationFormType::class, $user);
     $form->handleRequest($request);
@@ -40,9 +39,12 @@ class RegistrationController extends AbstractController
           )
         );
         //$user->setRoles(["ROLE_USER"]);
+        $name = $form['username']->getData();
         $imageFile = $form['avatar']->getData();
+        dd($form);
         if ($imageFile) {
-          $imageFileName = $fileUploader->upload($imageFile);
+
+          $imageFileName = $fileUploader->upload($imageFile,$uploadType,$name);
           $user->setAvatar($imageFileName);
       }
         $entityManager = $this->getDoctrine()->getManager();
