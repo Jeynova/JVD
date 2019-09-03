@@ -15,6 +15,8 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Service\TokenHandle;
 use App\Service\FileUploader;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 
 
@@ -41,7 +43,7 @@ class RegistrationController extends AbstractController
         //$user->setRoles(["ROLE_USER"]);
         $name = $form['username']->getData();
         $imageFile = $form['avatar']->getData();
-        dd($form);
+        //dd($imageFile);
         if ($imageFile) {
 
           $imageFileName = $fileUploader->upload($imageFile,$uploadType,$name);

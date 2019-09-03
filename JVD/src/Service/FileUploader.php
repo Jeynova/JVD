@@ -4,15 +4,24 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class FileUploader
 {
+    private $params;
     private $targetDirectory;
     const UPLOAD_AVATAR = 0;
 
-    public function __construct($targetDirectory)
+    public function __construct($targetDirectory,ParameterBagInterface $params)
     {
         $this->targetDirectory = $targetDirectory;
+         $this->params = $params;
     }
 
     public function upload(UploadedFile $file,$uploadType,$name)
@@ -25,17 +34,17 @@ class FileUploader
     case 0:
 
     $filesystem = new Filesystem();
-    $folderURL = $this->getParameter("images_directory");
+    $folderURL = $this->params->get("images_directory");
 
-    if (!$filesystem->exists($folderURL."/".$user->getUsername()."/avatar")) {
+    if (!$filesystem->exists($folderURL."/".$name."/avatar")) {
       try {
-        $filesystem->mkdir($folderURL."/".$user->getUsername()."/avatar", 0700);
+        $filesystem->mkdir($folderURL."/".$name."/avatar", 0700);
       } catch (IOExceptionInterface $exception) {
         echo "An error occurred while creating your directory at ".$exception->getPath();
       }
     }
     try {
-        $file->move($folderURL."/".$user->getUsername()."/avatar", $fileName);
+        $file->move($folderURL."/".$name."/avatar", $fileName);
     } catch (FileException $e) {
         // ... handle exception if something happens during file upload
     }
