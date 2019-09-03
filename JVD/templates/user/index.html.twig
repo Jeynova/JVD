@@ -6,6 +6,11 @@
 {% if app.user %}
     <h1>Bienvenue {{ app.user.username}}</h1>
 
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path("admin") }}" class="btn">ADMIN PAGE</a>
+    {% endif %}
+    
+
     <table>
         <thead>
         <tr>

@@ -12,7 +12,7 @@
         <li><a href="collapsible.html"><i class="material-icons">favorite</i></a></li>
         <li><a href="{{ path("picture") }}"><i class="material-icons">view_module</i></a></li>
         {% if app.user %}
-            <li><a href=""><i class="material-icons">face</i></a></li>
+            <li><a href="{{ path("user_show", {id: app.user.id})}}"><i class="material-icons">face</i></a></li>
         {% else %}
             <li><a href="{{ path("app_login") }}"><i class="material-icons">face</i></a></li>
         {% endif %}

@@ -26,7 +26,7 @@ class AdminController extends AbstractController {
 
 
     /**
-     * @Route("/", name="admin_index", methods={"GET", "POST"})
+     * @Route("/", name="admin", methods={"GET", "POST"})
      */
     public function index(Request $request) : Response {
 
