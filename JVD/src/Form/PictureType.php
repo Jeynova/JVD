@@ -44,7 +44,6 @@ class PictureType extends AbstractType
 
             ->add('tags', EntityType::class, [ // add this
                 'class' => Tag::class,
-                'choice_label' => 'name',
                 'expanded' =>true,
                 'multiple' => true,
             ])
