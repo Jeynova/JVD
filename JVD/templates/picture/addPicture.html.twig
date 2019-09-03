@@ -10,7 +10,13 @@
     {{ form_row(formPicture.name,{'attr':{'placeholder':'Nom de l\'image'}}) }}
     {{ form_row(formPicture.description,{'attr':{'placeholder':'Ajouter du texte a l\'image'}}) }}
     {{ form_row(formPicture.image,{'attr':{'placeholder':'Ajouter l\'image'}}) }}
-    {{ form_row(formPicture.tag,{'attr':{'placeholder':'Ajouter le tag','class': 'browser-default'}}) }}
+    <h3>Tags</h3>
+    <ul class="tag">
+        {# iterate over each existing tag and render its only field: name #}
+        {% for tag in formPicture.tag %}
+            <li>{{ form_row(tag.name) }}</li>
+        {% endfor %}
+    </ul>
     <button type="submit">
         {% if editMode %}
             Modifier

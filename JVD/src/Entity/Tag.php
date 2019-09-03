@@ -143,16 +143,8 @@ class Tag
 
         return $this;
     }
-<<<<<<< HEAD
-    public function __toString(){
-        // to show the name of the Category in the select
-        return $this->name;
-        // to show the id of the Category in the select
-        // return $this->id;
-=======
     public function __toString()
     {
      return $this->name;
->>>>>>> 61ec6bc33db31d3a553b8a17e2f4453afe4e1cef
     }
 }

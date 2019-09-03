@@ -14,11 +14,11 @@
             }
             .dropdown-trigger:hover {
               display: block
-            }      
+            }
             .nav-wrapper form{
               width: 40%;
             }
-            
+
             .brand-logo {
               position: relative!important;
             }
@@ -45,7 +45,7 @@
               -webkit-transition: .3s color!important;
               transition: .3s color!important;
             }
-            
+
           </style>
         {% endblock %}
         <!-- Compiled and minified CSS -->
@@ -56,78 +56,18 @@
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     </head>
     <body>
-<<<<<<< HEAD
-
-      <body>
 
         {% include "navbar.html.twig" %}
 
-
-
-
-
-      <style media="screen">
-      /* Add a black background color to the top navigation */
-  .topnav {
-    background-color: #333;
-    overflow: hidden;
-  }
-
-  /* Style the links inside the navigation bar */
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #4CAF50;
-    color: black;
-  }
-
-  .topnav a {
-  border-right: 1px solid #bbb;
-}
-
-.topnav a:last-child {
-  border-right: none;
-}
-      </style>
-      <div class="topnav">
-   <a href="{{ path('home') }}">Home</a>
-   <a href="#user">User</a>
-   <a href="{{path('picture')}}">Pictures</a>
-   <a href="#tags">Tags</a>
-   <a href="#categories">Categories</a>
-   <a href="#about" style="float:right">About</a>
- </div>
- <main >
-   {% block body %}{% endblock %}
- </main>
- {% block javascripts %}
-   <script>
-
-   </script>
- {% endblock %}
-
-=======
-        
-        {% include "navbar.html.twig" %}
-        
         <main >
           {% block body %}{% endblock %}
         </main>
-        
+
         {% block javascripts %}
           <script>
 
           </script>
         {% endblock %}
 
->>>>>>> 61ec6bc33db31d3a553b8a17e2f4453afe4e1cef
     </body>
 </html>
