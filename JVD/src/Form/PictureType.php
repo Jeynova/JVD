@@ -41,12 +41,19 @@ class PictureType extends AbstractType
                     ])
                 ],
             ])
-            ->add('tag', EntityType::class, [ // add this
+
+            ->add('tags', EntityType::class, [ // add this
                 'class' => Tag::class,
                 'choice_label' => 'name',
-                'expanded' => false,
+                'expanded' =>true,
                 'multiple' => true,
             ])
+//            ->add('tags', CollectionType::class, [
+//                'entry_type' => TagType::class,
+//                'entry_options' => ['label' => false],
+//                'allow_add' => true,
+//                'by_reference'=>false
+//            ])
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'save'],
             ]);
