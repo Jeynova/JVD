@@ -52,7 +52,7 @@ class Picture
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="pictures")
      */
-    private $tag;
+    private $tags;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Album", inversedBy="pictures")
@@ -71,7 +71,7 @@ class Picture
 
     public function __construct()
     {
-        $this->tag = new ArrayCollection();
+        $this->tags = new ArrayCollection();
         $this->album = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
@@ -161,24 +161,25 @@ class Picture
     /**
      * @return Collection|Tag[]
      */
-    public function getTag(): Collection
+    public function getTags(): Collection
     {
-        return $this->tag;
+        return $this->tags;
     }
 
     public function addTag(Tag $tag): self
     {
-        if (!$this->tag->contains($tag)) {
-            $this->tag[] = $tag;
-        }
-
-        return $this;
+//        if (!$this->tags->contains($tag)) {
+//            $this->tags[] = $tag;
+//        }
+//
+//        return $this;
+        $tag->addPicture($this);
     }
 
     public function removeTag(Tag $tag): self
     {
-        if ($this->tag->contains($tag)) {
-            $this->tag->removeElement($tag);
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
         }
 
         return $this;

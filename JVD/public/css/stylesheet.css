@@ -67,7 +67,7 @@ body {
 }
 
 div#columns figure {
-  background: #fefefe;
+
   /*border: 2px solid #fcfcfc;*/
   border-radius: 50%;
 
@@ -90,6 +90,7 @@ div#columns figure figcaption {
   color: #444;
   line-height: 1.5;
   margin-top: -7px;
+  padding: 1em;
   border: 1px solid lightgrey;
   border-radius: 0 0 50px 50px;
 }

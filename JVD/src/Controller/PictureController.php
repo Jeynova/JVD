@@ -65,11 +65,9 @@ class PictureController extends AbstractController
         if (!$picture) {
             $picture = new Picture();
         }
-        $tag = new Tag();
+
 
         $form = $this->createForm(PictureType::class, $picture);
-        $formTag = $this->createForm(TagType::class, $tag);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$picture->getId()) {
@@ -80,9 +78,6 @@ class PictureController extends AbstractController
                 $imageFile = $fileUploader->upload($file);
                 $picture->setImage($imageFile);
             }
-            $tagName = $formTag->getData('name');
-            $tag->setName($tagName);
-
             $picture->setUser($this->getUser());
             $manager->persist($picture);
             $manager->flush();
