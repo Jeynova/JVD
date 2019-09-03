@@ -8,15 +8,18 @@ main  {
   .dropdown-trigger:hover {
     display: block
   }      
-  .nav-form{
+  #nav-form{
     width: 40%!important;
+    margin: auto!important;
   }
+
+
   
   .brand-logo {
     position: relative!important;
   }
 
-  #bar div {
+  #bar div.nav-wrapper {
     display: flex!important;
     flex-direction: row!important;
     justify-content: space-between!important
