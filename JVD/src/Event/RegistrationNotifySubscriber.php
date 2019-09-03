@@ -28,7 +28,7 @@ class RegistrationNotifySubscriber implements EventSubscriberInterface
     {
         // On injecte notre expediteur et la classe pour envoyer des mails
         $this->mailer = $mailer;
-        $this->sender ="4513e92d92-f7d9cf@inbox.mailtrap.io";
+        $this->sender ="ff5d957cc0-e3309a@inbox.mailtrap.io";
         $this->renderer = $renderer;
     }
 

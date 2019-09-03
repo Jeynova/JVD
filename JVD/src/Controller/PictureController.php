@@ -5,8 +5,10 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Picture;
+use App\Entity\Tag;
 use App\Form\CommentType;
 use App\Form\PictureType;
+use App\Form\TagType;
 use App\Repository\PictureRepository;
 use App\Service\FileUploader;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -58,34 +60,40 @@ class PictureController extends AbstractController
      * @Route("/picture/new", name="new_picture")
      * @Route("/picture/{id}/edit",name="edit_picture")
      */
-    public function addPicture(Picture $picture = null, Request $request, ObjectManager $manager,FileUploader $fileUploader)
+    public function addPicture(Picture $picture = null, Request $request, ObjectManager $manager, FileUploader $fileUploader)
     {
         if (!$picture) {
             $picture = new Picture();
         }
+        $tag = new Tag();
 
         $form = $this->createForm(PictureType::class, $picture);
+        $formTag = $this->createForm(TagType::class, $tag);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$picture->getId()) {
                 $picture->setDate(new \DateTime());
             }
             $file = $form->get('image')->getData();
-            if ($file){
+            if ($file) {
                 $imageFile = $fileUploader->upload($file);
                 $picture->setImage($imageFile);
             }
+            $tagName = $formTag->getData('name');
+            $tag->setName($tagName);
+
             $picture->setUser($this->getUser());
             $manager->persist($picture);
             $manager->flush();
-
             return $this->redirectToRoute('picture_show', [
                 'id' => $picture->getId()
             ]);
         }
         return $this->render('picture/addPicture.html.twig', [
             'formPicture' => $form->createView(),
-            'editMode' => $picture->getId() !== null
+            'editMode' => $picture->getId() !== null,
+            'formTag' => $formTag->createView()
         ]);
     }
 

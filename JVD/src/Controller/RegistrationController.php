@@ -62,22 +62,22 @@ class RegistrationController extends AbstractController
         $dispatcher->dispatch($e, RegisterEvent::NAME);
 
 
-        // return $guardHandler->authenticateUserAndHandleSuccess(
-        //   $user,
-        //   $request,
-        //   $authenticator,
-        //   'main' // firewall name in security.yaml
-        // );
+            // return $guardHandler->authenticateUserAndHandleSuccess(
+            //   $user,
+            //   $request,
+            //   $authenticator,
+            //   'main' // firewall name in security.yaml
+            // );
 
-      }
+        }
 
-      return $this->render('registration/index.html.twig', [
-        'registrationForm' => $form->createView(),
-      ]);
+        return $this->render('registration/index.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
     }
     /**
-    * @return string
-    * @throws \Exception
-    */
+     * @return string
+     * @throws \Exception
+     */
 
-  }
+}

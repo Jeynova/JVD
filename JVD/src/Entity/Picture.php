@@ -48,6 +48,7 @@ class Picture
      */
     private $user;
 
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="pictures")
      */
