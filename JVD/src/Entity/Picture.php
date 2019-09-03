@@ -129,9 +129,10 @@ class Picture
     /**
      * @param mixed $image
      */
-    public function setImage($image): void
+    public function setImage($image)
     {
         $this->image = $image;
+        return $this;
     }
 
     public function getDescription(): ?string
