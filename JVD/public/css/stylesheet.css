@@ -87,6 +87,7 @@ div#columns figure img {
 
 div#columns figure figcaption {
   font-size: .9rem;
+  background-color: white;
   color: #444;
   line-height: 1.5;
   margin-top: -7px;
