@@ -27,7 +27,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles=array();
+    private $roles = array();
 
     /**
      * @var string The hashed password
@@ -75,10 +75,6 @@ class User implements UserInterface
      */
     private $comments;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Like", mappedBy="user")
-     */
-    private $likes;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="user")
@@ -95,14 +91,19 @@ class User implements UserInterface
      */
     private $pictures;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Jaime", mappedBy="user")
+     */
+    private $jaimes;
+
     public function __construct()
     {
         $this->accountFollows = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->likes = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->albums = new ArrayCollection();
         $this->pictures = new ArrayCollection();
+        $this->jaimes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,7 +118,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 
     public function setUsername(string $username): self
@@ -130,13 +131,13 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-     public function getRoles()
- {
-     $roles = $this->roles;
-     $roles[] = 'ROLE_USER';
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
 
-     return array_unique($roles);
- }
+        return array_unique($roles);
+    }
 
     public function setRoles(array $roles)
     {
@@ -150,7 +151,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -308,36 +309,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Like[]
-     */
-    public function getLikes(): Collection
-    {
-        return $this->likes;
-    }
-
-    public function addLike(Like $like): self
-    {
-        if (!$this->likes->contains($like)) {
-            $this->likes[] = $like;
-            $like->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLike(Like $like): self
-    {
-        if ($this->likes->contains($like)) {
-            $this->likes->removeElement($like);
-            // set the owning side to null (unless already changed)
-            if ($like->getUser() === $this) {
-                $like->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Tag[]
@@ -428,10 +399,43 @@ class User implements UserInterface
 
         return $this;
     }
-    public function __toString(){
+
+    public function __toString()
+    {
         // to show the name of the Category in the select
         return $this->username;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * @return Collection|Jaime[]
+     */
+    public function getJaimes(): Collection
+    {
+        return $this->jaimes;
+    }
+
+    public function addJaime(Jaime $jaime): self
+    {
+        if (!$this->jaimes->contains($jaime)) {
+            $this->jaimes[] = $jaime;
+            $jaime->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJaime(Jaime $jaime): self
+    {
+        if ($this->jaimes->contains($jaime)) {
+            $this->jaimes->removeElement($jaime);
+            // set the owning side to null (unless already changed)
+            if ($jaime->getUser() === $this) {
+                $jaime->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

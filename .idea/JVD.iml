@@ -9,9 +9,11 @@
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/collections" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/common" />
+      <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/data-fixtures" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/dbal" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/doctrine-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/doctrine-cache-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/doctrine-fixtures-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/doctrine-migrations-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/event-manager" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/inflector" />
@@ -22,6 +24,7 @@
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/persistence" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/doctrine/reflection" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/fzaninotto/faker" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/jdorn/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/JVD/vendor/ocramius/package-versions" />
