@@ -26,7 +26,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="tag_new", methods={"GET","POST"})
+     * @Route("picture/{id}/new", name="tag_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -35,6 +35,7 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $tag->addPicture($request->get('id'));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tag);
             $entityManager->flush();

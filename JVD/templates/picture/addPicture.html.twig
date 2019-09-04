@@ -29,13 +29,7 @@
             <input class="file-path validate" type="text">
         </div>
     </div>
-    {% for tag in formPicture.tags %}
-        <div class="inline col s3">
-        <label>
-            {{ form_widget(tag, { 'attr': { 'id': 'tag'} } ) }}
-            <span>{{ form_label(name) }}</span>
-        </label>
-        </div>{% endfor %}
+
 
 
 
