@@ -19,7 +19,7 @@ class Tag
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
@@ -30,12 +30,12 @@ class Tag
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Album", mappedBy="tag")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Album", mappedBy="tags")
      */
     private $albums;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Picture", mappedBy="tag")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Picture", mappedBy="tags")
      */
     private $pictures;
 

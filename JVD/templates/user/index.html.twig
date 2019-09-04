@@ -9,7 +9,7 @@
     {% if is_granted("ROLE_ADMIN") %}
         <a href="{{ path("admin") }}" class="btn">ADMIN PAGE</a>
     {% endif %}
-    
+
 
     <table>
         <thead>
@@ -41,6 +41,7 @@
         </tbody>
     </table>
     <a href="{{ path('new_picture') }}">Nouvelle image</a>
+    <a href="{{ path('album_new', {'id': user.id}) }}">Creer un nouvel album</a>
     {% else %}
     <p>Vous n'etas pas connecte</p>
     {% endif %}
