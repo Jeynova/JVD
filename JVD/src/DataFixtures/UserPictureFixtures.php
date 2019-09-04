@@ -74,7 +74,8 @@ public function __construct(UserPasswordEncoderInterface $passwordEncoder)
                     $user,
                     "123456"
                     )
-                  );
+                  )
+            ->setAvatar('3_avatar512-5d6e12f2463d8.png');
                   $manager->persist($user);
 }
 $manager->flush();

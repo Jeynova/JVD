@@ -120,8 +120,19 @@ div#columns:hover figure:not(:hover) {
 }
 
 /*Picture show */
-.showImage{
-  width: 60vh;
+
+.responsive-img{
+  ebkit-transition: .4s ease-in-out;
+  -moz-transition: .4s ease-in-out;
+  -ms-transition: .4s ease-in-out;
+  -o-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
+}
+
+
+.divShow{
+  margin-top: 10rem !important;
+  max-height: 100vh;
 }
 
 @media screen and (max-width: 750px) {
