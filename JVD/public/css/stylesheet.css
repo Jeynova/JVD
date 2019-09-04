@@ -13,7 +13,13 @@ main  {
     margin: auto!important;
   }
 
-
+  #request_drop-it-down, #charts_drop-it-down {
+    transition-duration: .6s
+  }
+  .rotation {
+  transform: rotate(90deg);
+  transition-duration: .6s
+  }
   
   .brand-logo {
     position: relative!important;
@@ -42,7 +48,7 @@ main  {
     transition: .3s color!important;
   }
   .hidden {
-    display: none
+    display: none!important
   }
   .inline {
       display:inline;

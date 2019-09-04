@@ -28,24 +28,18 @@ class TagController extends AbstractController
     /**
      * @Route("/new", name="tag_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request)
     {
         $tag = new Tag();
-        $form = $this->createForm(TagType::class, $tag);
-        $form->handleRequest($request);
+        //$form = $this->createForm(TagType::class, $tag);
+        //$form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tag);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tag_index');
-        }
-
-        return $this->render('tag/new.html.twig', [
-            'tag' => $tag,
-            'form' => $form->createView(),
-        ]);
+            
     }
 
     /**

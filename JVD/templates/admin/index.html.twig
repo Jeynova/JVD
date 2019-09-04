@@ -4,8 +4,11 @@
 
 {% block body %}
     <h1>Yo !</h1>
-
-    <form method="POST" id="admin_form">
+    <p><a id="chart" class="grey-text text-darken-4" style="cursor: pointer">Request Charts<i id="chart_drop-it-down" class="material-icons right">keyboard_arrow_right</i></a></p>
+    <hr>
+    <p><a id="request" class="grey-text text-darken-4" style="cursor: pointer">Request Dashboard<i id="request_drop-it-down" class="material-icons right">keyboard_arrow_right</i></a></p>
+    
+    <form method="POST" id="admin_form" class="hidden">
 
         <div class="row">
             <div class="input-field col s6">
@@ -14,7 +17,7 @@
                     <option value="\App\Entity\AccountFollow">AccountFollow</option>
                     <option value="\App\Entity\Album">Album</option>
                     <option value="\App\Entity\Comment">Comment</option>
-                    <option value="\App\Entity\Like">Like</option>
+                    <option value="\App\Entity\Jaime">Like</option>
                     <option value="\App\Entity\Picture">Picture</option>
                     <option value="\App\Entity\Tag">Tag</option>
                     <option value="\App\Entity\User">User</option>
@@ -44,7 +47,7 @@
         </form>
 
 
-        <button id="submit-dql" class="btn">Search</button>
+        <button id="submit-dql" class="btn hidden">Search</button>
         
         <form method="POST" id="search_form">
             <div class="row">
@@ -96,11 +99,21 @@
 {% block javascripts %}
             <script>
             
-            
+            // ** DROP IT DOWN **//
+            $('#request').click(function() {
+                $('#request_drop-it-down').toggleClass('rotation')
+                $('#admin_form').toggleClass('hidden')
+            })
+
+            $('#chart').click(function() {
+                $('#chart_drop-it-down').toggleClass('rotation')
+                
+            })
         
             /***** FUNCTION ONSELECT *****/
             $('#table').change(function () {
                     var entity = $('#table option:selected').val();
+                    
                     var data = {
                     name: "value",
                     value: entity
@@ -140,6 +153,7 @@
 
                         $('#groupBy').append("<option disabled selected value=''>-- Group By --</option><option value='a.id'>"+$('#table option:selected').html()+"</option>") 
                         
+                        $('#submit-dql').removeClass('hidden')
         
                     })
             })
