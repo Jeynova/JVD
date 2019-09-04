@@ -4,7 +4,12 @@
 
     <div class="row">
         <div class="col s12 m6 l6">
+<<<<<<< HEAD
             <img src="{{picture.image}}" alt="{{ picture.name }}">
+=======
+            <img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.name }}">
+            <a href="{{ path('tag_new', {'id': picture.id}) }}">Ajouter tag</a>
+>>>>>>> f67e586e0a83959719fea86a43eb57ad4ecb17c1
         </div>
         <div class="col s12 m6 l6">
             <div class="userInfo">

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Picture;
 use App\Entity\Tag;
 use App\Form\TagType;
 use App\Repository\TagRepository;
@@ -26,26 +26,34 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="tag_new", methods={"GET","POST"})
+     * @Route("picture/{id}/new", name="tag_new", methods={"GET","POST"})
      */
-    public function new(Request $request)
+    public function new(Request $request, Picture $picture)
     {
         $tag = new Tag();
-        //$form = $this->createForm(TagType::class, $tag);
-        //$form->handleRequest($request);
+        $form = $this->createForm(TagType::class,$tag);
+        $form->handleRequest($request);
 
-        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $form->getData('tags');
+            $tag->addPicture($picture);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tag);
             $entityManager->flush();
+            return $this->redirectToRoute('picture_show',['id'=> $picture->getId()] );
 
-            
+        }
+        return $this->render('tag/new.html.twig',[
+            'form'=>$form->createView()
+        ]);
     }
 
     /**
      * @Route("/{id}", name="tag_show", methods={"GET"})
      */
-    public function show(Tag $tag): Response
+    public
+    function show(Tag $tag): Response
     {
         return $this->render('tag/show.html.twig', [
             'tag' => $tag,
@@ -55,7 +63,8 @@ class TagController extends AbstractController
     /**
      * @Route("/{id}/edit", name="tag_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Tag $tag): Response
+    public
+    function edit(Request $request, Tag $tag): Response
     {
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
@@ -75,9 +84,10 @@ class TagController extends AbstractController
     /**
      * @Route("/{id}", name="tag_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Tag $tag): Response
+    public
+    function delete(Request $request, Tag $tag): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $tag->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($tag);
             $entityManager->flush();

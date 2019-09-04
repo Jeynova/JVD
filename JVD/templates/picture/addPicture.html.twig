@@ -25,22 +25,14 @@
             <span>Pict</span>
             {{ form_widget(formPicture.image, { 'attr': { 'id': 'image'} }) }}
         </div>
-        <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-        </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
     </div>
-    {% for tag in formPicture.tags %}
-        <div class="inline col s3">
-        <label>
-            {{ form_widget(tag, { 'attr': { 'id': 'tag'} } ) }}
-            <span>{{ form_label(name) }}</span>
-        </label>
-        </div>{% endfor %}
+    <div class="chips chips-placeholder">
+        {{ form_widget(formPicture.tags,{'attr':{'id':'tags'}}) }}
 
-
-
-    {{ form(formPicture) }}
-
+    </div>
     <button class="btn" type="submit">
         {% if editMode %}
             Modifier
@@ -49,7 +41,7 @@
         {% endif %}
     </button>
 
-    {#    {{ form_end(formPicture) }}#}
+        {{ form_end(formPicture) }}
 {% endblock %}
 
 
@@ -59,6 +51,14 @@
             var elems = document.querySelectorAll('.chips');
             var instances = M.Chips.init(elems, {placeholder: "Enter A Tag", secondaryPlaceholder: "+Tag"});
         });
+
+        // recuperation des datas tags
+        $('#tags').submit(function() {
+
+            let chipsData =(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData));
+            console.log(chipsData)
+        });
+
 
     </script>
 {% endblock %}

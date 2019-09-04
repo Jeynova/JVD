@@ -95,6 +95,10 @@ class PictureController extends AbstractController
     }
 
     /**
+     * @Route ("
+     */
+
+    /**
      * @Route("/picture/{id}/delete",name="delete_picture")
      */
     public function deletePicture($id, PictureRepository $pictureRepository, ObjectManager $manager)
