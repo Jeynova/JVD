@@ -62,6 +62,9 @@
         // ** NIGHT MODE ** //
         function darkmode(){
     $('body').addClass('grey darken-4 white-text');
+    $('main a').removeClass('grey-text text-darken-4')
+    $('main a').addClass('white-text')
+    $('input[type=text]').addClass('white-text')
     localStorage.setItem("mode", "dark");
     }
 
@@ -69,6 +72,9 @@
 
 function nodark(){
         $('body').removeClass('grey darken-4 white-text');
+        $('main a').removeClass('white-text')
+        $('main a').addClass('grey-text text-darken-4')
+        $('input[type=text]').removeClass('white-text')
         localStorage.setItem("mode", "light");
         }
 
