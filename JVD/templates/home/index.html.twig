@@ -12,7 +12,7 @@
         {% for pict in picture %}
 
                 <figure>
-                    <a href="{{ path('picture_show', {'id': pict.id}) }}">  <img src="{{ asset('uploads/images/'~pict.image) }}"></a>
+                    <a href="{{ path('picture_show', {'id': pict.id}) }}">  <img src="{{pict.image}}"></a>
                     <figcaption>{{ pict.title }}</figcaption>
                 </figure>
 

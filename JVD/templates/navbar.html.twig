@@ -48,7 +48,8 @@
 
         $('#nav-search').click(function() {
           $('#nav-search').html("")
-          $('#nav-form').html("<div class='input-field'><input id='input-search' type='search' name='search'><label class='label-icon' for='search'><i class='material-icons'>search</i></label><a id='close-search'><i class='material-icons'>close</i></a></div>")
+          $('#nav-form').html("<div class='input-field'><input id='input-search' type='search' name='search' focus><label class='label-icon' for='search'><i class='material-icons'>search</i></label><a id='close-search'><i class='material-icons'>close</i></a></div>")
+          $('#input-search').focus()
           $('input[type=search]').focus(function() {
           $('#close-search .material-icons').addClass('black-text')
           $('#close-search').click(function() {
