@@ -14,7 +14,7 @@ class AlbumType extends AbstractType
         $builder
             ->add('title')
             ->add('isPrivate')
-            ->add('tags')
+            ->add('tag')
             ->add('user')
             ->add('pictures')
         ;
