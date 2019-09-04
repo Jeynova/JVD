@@ -17,6 +17,8 @@ class FileUploader
     private $params;
     private $targetDirectory;
     const UPLOAD_AVATAR = 0;
+    const UPLOAD_PICTURE = 1;
+    const UPLOAD_ALBUM = 2;
 
     public function __construct($targetDirectory,ParameterBagInterface $params)
     {
