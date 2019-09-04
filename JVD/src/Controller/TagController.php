@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Picture;
 use App\Entity\Tag;
 use App\Form\TagType;
 use App\Repository\TagRepository;
@@ -28,16 +28,19 @@ class TagController extends AbstractController
     /**
      * @Route("/new", name="tag_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Picture $picture)
     {
         $tag = new Tag();
-        $form = $this->createForm(TagType::class, $tag);
+        $form = $this->createForm(TagType::class,$tag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $form->getData('tags');
+            $tag->addPicture($picture);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tag);
             $entityManager->flush();
+            return $this->redirectToRoute('picture_show',['id'=> $picture->getId()] );
 
             return $this->redirectToRoute('tag_index');
         }

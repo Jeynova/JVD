@@ -38,13 +38,19 @@ class PictureController extends AbstractController
      */
     public function showPicture(Picture $picture, Request $request, ObjectManager $manager)
     {
+        $user = $this->getUser();
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setDate(new \DateTime());
             $comment->setPicture($picture);
-            $comment->setUser($this->getUser());
+            if(!$user){
+                $comment->setUser(null);
+            }else{
+                $comment->setUser($user);
+            }
+
             $manager->persist($comment);
             $manager->flush();
             return $this->redirectToRoute('picture_show', [

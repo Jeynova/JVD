@@ -2,12 +2,12 @@
 
 {% block body %}
 
-    <div class="row">
-        <div class="col s12 m6 l6">
-            <img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.name }}">
+    <div class="row divShow">
+        <div class="col s12 m8 l8 showImage ">
+            <img class="responsive-img" src="{{ picture.image }}" alt="{{ picture.name }}">
             <a href="{{ path('tag_new', {'id': picture.id}) }}">Ajouter tag</a>
         </div>
-        <div class="col s12 m6 l6">
+        <div class="col s12 m4 l4 showInfo">
             <div class="userInfo">
                 <div class="row valign-wrapper">
                     <div class="col s2">
@@ -27,18 +27,24 @@
             </div>
 
             <div class="formComment">
-             {{ form_start(formComment) }}
+                {{ form_start(formComment) }}
                 {{ form_widget(formComment,{'attr':{'label':'Votre commentaire'}}) }}
                 {{ form_end(formComment) }}
             </div>
             <div class="comment">
                 <ul class="collection">
-                    {% for comment in picture.comments  %}
+                    {% for comment in picture.comments %}
                         <li class="collection-item avatar">
-                            <img src="{{asset('uploads/images/' ~ comment.user.avatar)}}" alt="" class="circle">
-                            <span class="title">{{comment.user.username}}</span>
+                            {% if comment.user is null %}}
+                                <img src="" alt="">
+                                <span class="title">Visiteur</span>
+                            {% else %}
+                                <img src="{{ asset('uploads/images/'~ comment.user.avatar) }}" alt="" class="circle">
+                                <span class="title">{{ comment.user.username }}</span>
+                            {% endif %}
+
                             <p> {{ comment.content }}<br>
-                              <em style="font-size: .7em">{{comment.date | date('d-m-y')}} </em>
+                                <em style="font-size: .7em">{{ comment.date | date('d-m-y') }} </em>
                             </p>
                             <a href="#" class="secondary-content"><i class="material-icons">favorite</i></a>
                         </li>
@@ -51,4 +57,10 @@
         </div>
 
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+
+
+    </script>
 {% endblock %}
