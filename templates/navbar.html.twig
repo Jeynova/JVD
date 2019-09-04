@@ -1,0 +1,102 @@
+<div class="navbar-fixed">
+<nav id='bar' class="deep-purple">
+    <div class="nav-wrapper nav-center" style="width: 98%; margin: auto">
+    <a href="{{ path("home") }}" class="brand-logo"><i class="material-icons">brightness_medium</i>Pict'ur</a>
+
+    <form method="post" id="nav-form">
+
+    </form>
+
+    <ul>
+
+        <li id="nav-search"><a><i class="material-icons">search</i></a></li>
+        <li><a href="collapsible.html"><i class="material-icons">favorite</i></a></li>
+        <li><a href="{{ path("picture") }}"><i class="material-icons">view_module</i></a></li>
+        {% if app.user %}
+            <li><a href="{{ path("user_show", {id: app.user.id})}}"><i class="material-icons">face</i></a></li>
+        {% else %}
+            <li><a href="{{ path("app_login") }}"><i class="material-icons">face</i></a></li>
+        {% endif %}
+        <!-- Dropdown Trigger -->
+        <li><a class="dropdown-trigger" href="" data-target="dropdown-set" style="font-size:1.5rem;font-weight: bolder; transform: rotate(90deg); outline: none"><b>...</b></a></li>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown-set' class='dropdown-content'>
+            <li><a href="#!"><div class="switch">
+                <label>
+                  Night Mode
+                  <input type="checkbox" id="night_mode">
+                  <span class="lever"></span>
+                </label>
+              </div></a></li>
+            <li class="divider" tabindex="-1"></li>
+            <li><a href="{{ path("app_logout") }}" class="center"><i class="material-icons" style="float: none; margin: auto; display:inline-block">power_settings_new</i>Logout</a></li>
+        </ul>
+
+
+      </ul>
+    </div>
+  </nav>
+</div>
+  {% block javascripts %}
+    <script>
+        // ** INIT DROPDOWN **//
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems, { coverTrigger: false, hover: true });
+        });
+
+        $('#nav-search').click(function() {
+          $('#nav-search').html("")
+          $('#nav-form').html("<div class='input-field'><input id='input-search' type='search' name='search' focus><label class='label-icon' for='search'><i class='material-icons'>search</i></label><a id='close-search'><i class='material-icons'>close</i></a></div>")
+          $('#input-search').focus()
+          $('input[type=search]').focus(function() {
+          $('#close-search .material-icons').addClass('black-text')
+          $('#close-search').click(function() {
+          $('#nav-search').html("<a><i class='material-icons'>search</i></a>")
+          $('#nav-form').html("")
+        })
+        })
+        })
+
+        // ** NIGHT MODE ** //
+        function darkmode(){
+    $('body').addClass('grey darken-4 white-text');
+    $('main a').removeClass('grey-text text-darken-4')
+    $('main a').addClass('white-text')
+    $('input[type=text]').addClass('white-text')
+    localStorage.setItem("mode", "dark");
+    }
+
+
+
+function nodark(){
+        $('body').removeClass('grey darken-4 white-text');
+        $('main a').removeClass('white-text')
+        $('main a').addClass('grey-text text-darken-4')
+        $('input[type=text]').removeClass('white-text')
+        localStorage.setItem("mode", "light");
+        }
+
+  if(localStorage.getItem("mode")=="dark")
+  {
+        darkmode();
+        $("#night_mode").prop('checked', true);
+  } else {
+      nodark();
+  }
+
+$('#night_mode').change(function(){
+
+    if ($(this).prop('checked'))
+    {
+        darkmode();
+    }
+    else
+    {
+        nodark();
+    }
+
+});
+    </script>
+  {% endblock %}

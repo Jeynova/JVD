@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1>Register</h1>
+
+    {{ form_start(registrationForm) }}
+    <div class="input-field">
+            {{ form_widget(registrationForm.username, { 'attr': { 'id': 'username'} }) }}
+            {{ form_label(registrationForm.username, 'Username', { 'label_attr': {'for': 'username'} }) }}
+        </div>
+        <div class="input-field">
+                {{ form_widget(registrationForm.email, { 'attr': { 'id': 'mail'} }) }}
+                {{ form_label(registrationForm.email, 'Mail', { 'label_attr': {'for': 'mail'} }) }}
+            </div>
+            <div class="input-field">
+                    {{ form_widget(registrationForm.country, { 'attr': { 'id': 'country'} }) }}
+                    {{ form_label(registrationForm.country, 'Country', { 'label_attr': {'for': 'country'} }) }}
+                </div>
+            <div class="input-field">
+                    {{ form_widget(registrationForm.city, { 'attr': { 'id': 'city'} }) }}
+                    {{ form_label(registrationForm.city, 'city', { 'label_attr': {'for': 'city'} }) }}
+            </div>
+            <div class="file-field input-field">
+                    <div class="btn">
+                      <span>Avatar</span>
+                      {{ form_widget(registrationForm.avatar, { 'attr': { 'id': 'avatar'} }) }} 
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text">
+                    </div>
+                  </div>
+        <div class="row col s12" style="margin-bottom: 0">
+                <div class="input-field col s6">
+                    {{ form_widget(registrationForm.plainPassword, { 'attr': { 'id': 'plainPassword'} }) }}
+                    {{ form_label(registrationForm.plainPassword, 'Plain Password', { 'label_attr': {'for': 'plainPassword'} }) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(registrationForm.plainPasswordConfirm, { 'attr': { 'id': 'plainPasswordConfirm'} }) }}
+                    {{ form_label(registrationForm.plainPasswordConfirm, 'Plain Password Confirm', { 'label_attr': {'for': 'plainPasswordConfirm'} }) }}
+                    <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+                </div>
+            </div>
+
+            <div style="margin-bottom:  1.5%">
+                    <label>
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        <span>Agree Terms</span>
+                    </label>
+                </div>
+
+        <button class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+            $("#registration_form_plainPassword").on("focusout", function (e) {
+        if ($(this).val() != $("#registration_form_plainPasswordConfirm").val()) {
+            $("#registration_form_plainPasswordConfirm").removeClass("valid").addClass("invalid");
+        } else {
+            $("#registration_form_plainPasswordConfirm").removeClass("invalid").addClass("valid");
+        }
+    });
+
+    $("#registration_form_plainPasswordConfirm").on("keyup", function (e) {
+        if ($("#registration_form_plainPassword").val() != $(this).val()) {
+            $(this).removeClass("valid").addClass("invalid");
+        } else {
+            $(this).removeClass("invalid").addClass("valid");
+        }
+    });
+    </script>
+{% endblock %}

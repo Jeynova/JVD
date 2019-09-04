@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Picture Index{% endblock %}
+
+{% block body %}
+    <h1>Picture Index</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>UserId</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for picture in pictures %}
+            <tr>
+                <td>{{ picture.id }}</td>
+                <td>{{ picture.user.username }}</td>
+                <td>{{ picture.name }}</td>
+                <td>{{ picture.title }}</td>
+                <td>{{ picture.date | date('d-m-Y') }}</td>
+                <td>{{ picture.description }}</td>
+                <td><img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.title }}"></td>
+                <td>
+                    <a href="{{ path('picture_show', {'id': picture.id}) }}">show</a>
+                    <a href="{{ path('edit_picture', {'id': picture.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('new_picture') }}">Nouvelle image</a>
+
+{% endblock %}
