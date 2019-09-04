@@ -20,11 +20,11 @@ class HomeController extends AbstractController
      */
     public function index(PictureRepository $picture)
     {
-        $p = $picture->findAll();
-      $user = $this->getUser();
+
+
         return $this->render('home/index.html.twig', [
-            'picture' => $p,
-            'user'=>$user,
+            'picture' => $picture->findAll(),
+            'user'=>$this->getUser(),
         ]);
     }
 
