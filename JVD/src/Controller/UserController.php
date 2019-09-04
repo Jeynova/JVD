@@ -26,7 +26,7 @@ class UserController extends AbstractController
             ->findBy(array('user'=> $user->getId()));
         return $this->render('user/index.html.twig', [
             'pictures' => $pictures,
-            'user' => $user->getId(),
+            'user' => $user,
         ]);
     }
 

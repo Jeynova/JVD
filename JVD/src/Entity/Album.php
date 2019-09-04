@@ -91,7 +91,8 @@ class Album
    }
    public function setUser(?User $user): self
    {
-       $this->user = $user;        return $this;
+       $this->user = $user;
+       return $this;
    }
    /**
     * @return Collection|Picture[]

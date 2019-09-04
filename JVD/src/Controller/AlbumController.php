@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Album;
 use App\Form\AlbumType;
+use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Repository\AlbumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/album")
@@ -16,13 +19,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AlbumController extends AbstractController
 {
     /**
-     * @Route("/", name="album_index", methods={"GET"})
+     * @Route("/", name="album_index", methods={"GET","POST"})
      */
-    public function index(AlbumRepository $albumRepository): Response
-    {
+    public function index(AlbumRepository $albumRepository, SessionInterface $session): Response
+    {   $user = $this->getUser();
+      if ($user instanceof User) {
         return $this->render('album/index.html.twig', [
-            'albums' => $albumRepository->findAll(),
+            'albums' => $albumRepository->findBy(array('user' => $user))
         ]);
+      }
+
     }
 
     /**
@@ -35,10 +41,11 @@ class AlbumController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $album->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($album);
             $entityManager->flush();
-
             return $this->redirectToRoute('album_index');
         }
 
@@ -49,7 +56,7 @@ class AlbumController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="album_show", methods={"GET"})
+     * @Route("/show/{id}", name="album_show", methods={"GET","POST"})
      */
     public function show(Album $album): Response
     {

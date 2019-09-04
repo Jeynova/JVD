@@ -1,15 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<style media="screen">
+
+
+
+
+canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+</style>
+
+{% endblock %}
 {% block body %}
 
     <div class="row">
         <div class="col s12 m6 l6">
-<<<<<<< HEAD
             <img src="{{picture.image}}" alt="{{ picture.name }}">
-=======
-            <img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.name }}">
-            <a href="{{ path('tag_new', {'id': picture.id}) }}">Ajouter tag</a>
->>>>>>> f67e586e0a83959719fea86a43eb57ad4ecb17c1
         </div>
         <div class="col s12 m6 l6">
             <div class="userInfo">
@@ -55,4 +63,40 @@
         </div>
 
     </div>
+
+
+
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+
+
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript">
+
+
+
+var src = {{ picture.image }};
+var photo  = new Image();
+var canvas = document.getElementById('canvas');
+var ctx    = canvas.getContext('2d');
+
+function render () {
+  // Scale so that the image fills the container
+  var width  = window.innerWidth;
+  var scale  = width / photo.naturalWidth;
+  var height = photo.naturalHeight * scale;;
+
+  canvas.width  = width;
+  canvas.height = height;
+
+  ctx.drawImage(photo, 0, 0);
+}
+
+photo.onload = render;
+photo.crossOrigin = "Anonymous";
+photo.src = ""+src+"";
+
+</script>
+
 {% endblock %}
