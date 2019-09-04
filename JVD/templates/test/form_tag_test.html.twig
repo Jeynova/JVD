@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="chips chips-placeholder">
+
 </div>
 
 <button id="btn-chip">chip</button>
@@ -15,7 +16,7 @@
     var instances = M.Chips.init(elems, {placeholder:"enter a tag", secondaryPlaceholder:"+tag"});
   });
 
-        $('#btn-chip').submit(function() {
+        $('#btn-chip').(function() {
            
      console.log(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData));
 });

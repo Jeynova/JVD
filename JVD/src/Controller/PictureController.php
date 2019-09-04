@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Picture;
 use App\Entity\Tag;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Form\PictureType;
 use App\Form\TagType;
@@ -63,20 +64,43 @@ class PictureController extends AbstractController
      */
     public function addPicture(TagRepository $tagRepository,Picture $picture = null, Request $request, ObjectManager $manager, FileUploader $fileUploader)
     {
+        $uploadType = FileUploader::UPLOAD_IMG;
+        $user = $this -> getUser();
+
         if (!$picture) {
             $picture = new Picture();
         }
 
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        
+        $dbTags = $tagRepository -> findAll();
+
+        
+
+        if ($form->isSubmitted()) {
             if (!$picture->getId()) {
                 $picture->setDate(new \DateTime());
             }
-
+            
+            $tempotags = $form -> get('tempotags') -> getData();
+            $arrayTags = explode(",", $tempotags);
+            foreach ($arrayTags as $simpleTag) {
+                if(in_array($simpleTag, $dbTags)) {
+                    $oldTag = $tagRepository -> findByTag($simpleTag);
+                    $picture -> addTag($oldTag[0]);
+                } else if (!in_array($simpleTag, $dbTags)) {
+                    $newTag = new Tag();
+                    $newTag -> setName($simpleTag);
+                    $manager->persist($newTag);
+                    $manager->flush();
+                    $picture -> addTag($newTag);
+                }
+                
+            }
             $file = $form->get('image')->getData();
             if ($file) {
-                $imageFile = $fileUploader->upload($file);
+                $imageFile = $fileUploader->upload($file, $uploadType, $user);
                 $picture->setImage($imageFile);
             }
             $picture->setUser($this->getUser());
