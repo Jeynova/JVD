@@ -3,8 +3,8 @@
 {% block body %}
 
     <div class="row">
-        <div class="col s12 m6 l6">
-            <img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.name }}">
+        <div class="col s12 m6 l6 showImage ">
+            <img class="responsive-img" src="{{ picture.image }}" alt="{{ picture.name }}">
             <a href="{{ path('tag_new', {'id': picture.id}) }}">Ajouter tag</a>
         </div>
         <div class="col s12 m6 l6">

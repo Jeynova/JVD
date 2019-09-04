@@ -87,7 +87,7 @@ for ($i=0; $i <=25 ; $i++) {
     $picture = new Picture();
     $picture->setName($faker->company)
           ->setTitle($faker->catchPhrase)
-          ->setImage($faker->imageUrl($width = 320, $height = 240))
+          ->setImage($faker->imageUrl($width = rand(500,2000), $height = rand(500,2000)))
           ->setDate(new \DateTime())
           ->setDescription($faker->sentence($nbWords = 6, $variableNbWords = true))
           ->setUser($a[$rand]);

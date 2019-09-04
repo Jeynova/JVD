@@ -119,6 +119,11 @@ div#columns:hover figure:not(:hover) {
   opacity: 0.4;
 }
 
+/*Picture show */
+.showImage{
+  width: 60vh;
+}
+
 @media screen and (max-width: 750px) {
   #columns {
       column-gap: 0px;
