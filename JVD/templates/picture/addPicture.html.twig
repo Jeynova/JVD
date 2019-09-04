@@ -25,9 +25,9 @@
             <span>Pict</span>
             {{ form_widget(formPicture.image, { 'attr': { 'id': 'image'} }) }}
         </div>
-        {#        <div class="file-path-wrapper">#}
-        {#            <input class="file-path validate" type="text">#}
-        {#        </div>#}
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
     </div>
     <div class="chips chips-placeholder">
         {{ form_widget(formPicture.tags,{'attr':{'id':'tags'}}) }}
@@ -51,6 +51,14 @@
             var elems = document.querySelectorAll('.chips');
             var instances = M.Chips.init(elems, {placeholder: "Enter A Tag", secondaryPlaceholder: "+Tag"});
         });
+
+        // recuperation des datas tags
+        $('#tags').submit(function() {
+
+            let chipsData =(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData));
+            console.log(chipsData)
+        });
+
 
     </script>
 {% endblock %}

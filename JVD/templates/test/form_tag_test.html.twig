@@ -15,10 +15,10 @@
     var instances = M.Chips.init(elems, {placeholder:"enter a tag", secondaryPlaceholder:"+tag"});
   });
 
-        $('#btn-chip').submit(function() {
-           
-     console.log(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData));
-});
-    
+            $('#btn-chip').submit(function() {
+
+                console.log(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData));
+            });
+
     </script>
 {% endblock %}

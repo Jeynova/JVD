@@ -170,12 +170,12 @@ class Picture
 
     public function addTag(Tag $tag): self
     {
-//        if (!$this->tags->contains($tag)) {
-//            $this->tags[] = $tag;
-//        }
-//
-//        return $this;
-        $tag->addPicture($this);
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+
     }
 
     public function removeTag(Tag $tag): self

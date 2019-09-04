@@ -42,7 +42,7 @@ class PictureType extends AbstractType
                     ])
                 ],
             ])
-            ->add('tags')
+            ->add('tags');
 //            ->add('tags', EntityType::class, [ // add this
 //                'class' => Tag::class,
 //                'expanded' => true,
@@ -62,7 +62,7 @@ class PictureType extends AbstractType
 //                'allow_add' => true,
 //                'by_reference'=>false
 //            ])
-           
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
