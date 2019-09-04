@@ -35,7 +35,7 @@ class Tag
     private $albums;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Picture", mappedBy="tag")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Picture", mappedBy="tags")
      */
     private $pictures;
 
