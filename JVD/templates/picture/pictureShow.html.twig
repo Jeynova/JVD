@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col s12 m6 l6">
             <img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.name }}">
-            <a href="{{ path('new_tag', {'id': picture.id}) }}">Ajouter tag</a>
+            <a href="{{ path('tag_new', {'id': picture.id}) }}">Ajouter tag</a>
         </div>
         <div class="col s12 m6 l6">
             <div class="userInfo">
@@ -38,7 +38,7 @@
                             <img src="{{asset('uploads/images/' ~ comment.user.avatar)}}" alt="" class="circle">
                             <span class="title">{{comment.user.username}}</span>
                             <p> {{ comment.content }}<br>
-                              <em style="font-size: .7em">{{comment.date | date('d-m-y')}} </em> <a href="{{ path('new_tag') }}"></a>
+                              <em style="font-size: .7em">{{comment.date | date('d-m-y')}} </em>
                             </p>
                             <a href="#" class="secondary-content"><i class="material-icons">favorite</i></a>
                         </li>

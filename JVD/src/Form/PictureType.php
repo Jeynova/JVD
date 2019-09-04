@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Picture;
 use App\Entity\Tag;
 use App\Repository\TagRepository;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -41,28 +42,27 @@ class PictureType extends AbstractType
                     ])
                 ],
             ])
-            ->add('tags', EntityType::class, [ // add this
-                'class' => Tag::class,
-                'expanded' => true,
-                'multiple' => true,
-                'query_builder' => function (TagRepository $tr) {
-                    return $tr->createQueryBuilder('t')
-                        ->orderBy('t.name', 'ASC');
-                }
-            ])
-            ->add('tags',ChoiceType::class,[
-                'mapped'=>false,
-                'multiple'=>true
-            ])
+            ->add('tags')
+//            ->add('tags', EntityType::class, [ // add this
+//                'class' => Tag::class,
+//                'expanded' => true,
+//                'multiple' => true,
+//                'query_builder' => function (TagRepository $tr) {
+//                    return $tr->createQueryBuilder('t')
+//                        ->orderBy('t.name', 'ASC');
+//                }
+//            ])
+//            ->add('tags',ChoiceType::class,[
+//                'mapped'=>false,
+//                'multiple'=>true
+//            ])
 //            ->add('tags', CollectionType::class, [
 //                'entry_type' => TagType::class,
 //                'entry_options' => ['label' => false],
 //                'allow_add' => true,
 //                'by_reference'=>false
 //            ])
-            ->add('save', SubmitType::class, [
-                'attr' => ['class' => 'save'],
-            ]);
+           
     }
 
     public function configureOptions(OptionsResolver $resolver)

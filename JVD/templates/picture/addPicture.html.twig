@@ -25,16 +25,14 @@
             <span>Pict</span>
             {{ form_widget(formPicture.image, { 'attr': { 'id': 'image'} }) }}
         </div>
-        <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-        </div>
+        {#        <div class="file-path-wrapper">#}
+        {#            <input class="file-path validate" type="text">#}
+        {#        </div>#}
     </div>
+    <div class="chips chips-placeholder">
+        {{ form_widget(formPicture.tags,{'attr':{'id':'tags'}}) }}
 
-
-
-
-    {{ form(formPicture) }}
-
+    </div>
     <button class="btn" type="submit">
         {% if editMode %}
             Modifier
@@ -43,7 +41,7 @@
         {% endif %}
     </button>
 
-    {#    {{ form_end(formPicture) }}#}
+        {{ form_end(formPicture) }}
 {% endblock %}
 
 
