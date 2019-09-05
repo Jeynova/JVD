@@ -31,7 +31,7 @@ class Album
    /**
     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="albums")
     */
-   private $tag;
+   private $tags;
 
    /**
     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="albums")
@@ -69,20 +69,20 @@ class Album
    /**
     * @return Collection|Tag[]
     */
-   public function getTag(): Collection
+   public function getTags(): Collection
    {
-       return $this->tag;
+       return $this->tags;
    }
    public function addTag(Tag $tag): self
    {
-       if (!$this->tag->contains($tag)) {
-           $this->tag[] = $tag;
+       if (!$this->tags->contains($tag)) {
+           $this->tags[] = $tag;
        }        return $this;
    }
    public function removeTag(Tag $tag): self
    {
-       if ($this->tag->contains($tag)) {
-           $this->tag->removeElement($tag);
+       if ($this->tags->contains($tag)) {
+           $this->tags->removeElement($tag);
        }        return $this;
    }
    public function getUser(): ?User
