@@ -25,23 +25,14 @@
             <span>Pict</span>
             {{ form_widget(formPicture.image, { 'attr': { 'id': 'image'} }) }}
         </div>
-        <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-        </div>
+       <div class="file-path-wrapper">
+               <input class="file-path validate" type="text">
+              </div>
     </div>
-    {% for tag in formPicture.tags %}
-        <div class="inline col s3">
-        <label>
-            {{ form_widget(tag, { 'attr': { 'id': 'tag'} } ) }}
-            <span>{{ form_label(name) }}</span>
-        </label>
-        </div>{% endfor %}
+    <div class="chips chips-placeholder">
 
-
-
-    {{ form(formPicture) }}
-
-    <button class="btn" type="submit">
+    </div>{{ form_widget(formPicture.tempotags,{'attr':{'id':'tags'}}) }}
+    <button class="btn" id="picture_submit">
         {% if editMode %}
             Modifier
         {% else %}
@@ -49,7 +40,9 @@
         {% endif %}
     </button>
 
-    {#    {{ form_end(formPicture) }}#}
+        {{ form_end(formPicture) }}
+
+        <button id="chip">yo</button>
 {% endblock %}
 
 
@@ -60,5 +53,16 @@
             var instances = M.Chips.init(elems, {placeholder: "Enter A Tag", secondaryPlaceholder: "+Tag"});
         });
 
+        $("#picture_submit").click(function (){
+            var chipData = M.Chips.getInstance($('.chips')).chipsData
+            console.log(chipData)
+            var datag = []
+            $.each(chipData, function(k,v) {
+                datag.push(v.tag)
+            })
+
+            $('#picture_tempotags').val(datag)
+            console.log($('#picture_tags').val())
+        })
     </script>
 {% endblock %}

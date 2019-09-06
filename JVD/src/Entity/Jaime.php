@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\LikeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\JaimeRepository")
  */
-class Like
+class Jaime
 {
     /**
      * @ORM\Id()
@@ -17,12 +17,12 @@ class Like
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="likes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="jaimes")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", inversedBy="likes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", inversedBy="jaimes")
      */
     private $picture;
 

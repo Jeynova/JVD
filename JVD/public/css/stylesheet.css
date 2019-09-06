@@ -1,4 +1,5 @@
 main  {
+  font-size: 1em;
     width: 80%;
     margin: auto
   }
@@ -13,7 +14,13 @@ main  {
     margin: auto!important;
   }
 
-
+  #request_drop-it-down, #charts_drop-it-down {
+    transition-duration: .6s
+  }
+  .rotation {
+  transform: rotate(90deg);
+  transition-duration: .6s
+  }
   
   .brand-logo {
     position: relative!important;
@@ -42,7 +49,7 @@ main  {
     transition: .3s color!important;
   }
   .hidden {
-    display: none
+    display: none!important
   }
   .inline {
       display:inline;
@@ -111,6 +118,22 @@ div#columns small a {
 
 div#columns:hover figure:not(:hover) {
   opacity: 0.4;
+}
+
+/*Picture show */
+
+.responsive-img{
+  ebkit-transition: .4s ease-in-out;
+  -moz-transition: .4s ease-in-out;
+  -ms-transition: .4s ease-in-out;
+  -o-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
+}
+
+
+.divShow{
+  margin-top: 10rem !important;
+  max-height: 100vh;
 }
 
 @media screen and (max-width: 750px) {

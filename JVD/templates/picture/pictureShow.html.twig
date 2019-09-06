@@ -1,53 +1,140 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<style media="screen">
+
+
+canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+</style>
+
+{% endblock %}
 {% block body %}
 
-    <div class="row">
-        <div class="col s12 m6 l6">
-            <img src="{{ asset('uploads/images/'~ picture.image) }}" alt="{{ picture.name }}">
+
+<div class="row divShow">
+  <div class="col s12 m12 l8 showImage ">
+    <img class="responsive-img" id="canvasPic" src="{{ picture.image }}" alt="{{ picture.name }}">
+    <a href="{{ path('tag_new', {'id': picture.id}) }}">Ajouter tag</a>
+
+  </div>
+  <div class="col s12 m12 l4 showInfo">
+    <div class="userInfo">
+      <div class="row valign-wrapper">
+        <div class="col s3">
+          <img src="{{ asset('uploads/images/'~ picture.user.avatar) }}" alt=""
+          class=" circle responsive-img">
+          <!-- notice the "circle" class -->
         </div>
-        <div class="col s12 m6 l6">
-            <div class="userInfo">
-                <div class="row valign-wrapper">
-                    <div class="col s2">
-                        <img src="{{ asset('uploads/images/'~ picture.user.avatar) }}" alt=""
-                             class=" circle responsive-img">
-                        <!-- notice the "circle" class -->
-                    </div>
-                    <div class="col s10">
-              <span class="black-text">
-                  <strong> {{ picture.user.username }}</strong> a posté l'image <strong>{{ picture.title }}</strong>
-                  <div class="postInfo">
+        <div class="col s9">
+          <div class="col s9">
+            <span class="black-text">
+              <strong> {{ picture.user.username }}</strong> a posté l'image <strong>{{ picture.title }}</strong>
+              <div class="postInfo">
                 <p>{{ picture.description }}</p>
-            </div>
-              </span>
-                    </div>
+                <p>{% for tag in picture.tags %}
+                  <div class="chip">{{ tag }}</div>
+                  {% endfor %}</p>
+
                 </div>
+              </span>
             </div>
-
-            <div class="formComment">
-             {{ form_start(formComment) }}
-                {{ form_widget(formComment,{'attr':{'label':'Votre commentaire'}}) }}
-                {{ form_end(formComment) }}
-            </div>
-            <div class="comment">
-                <ul class="collection">
-                    {% for comment in picture.comments  %}
-                        <li class="collection-item avatar">
-                            <img src="{{asset('uploads/images/' ~ comment.user.avatar)}}" alt="" class="circle">
-                            <span class="title">{{comment.user.username}}</span>
-                            <p> {{ comment.content }}<br>
-                              <em style="font-size: .7em">{{comment.date | date('d-m-y')}} </em>
-                            </p>
-                            <a href="#" class="secondary-content"><i class="material-icons">favorite</i></a>
-                        </li>
-                    {% endfor %}
-
-
-                </ul>
-
-            </div>
+          </div>
         </div>
+
+        <div class="formComment">
+          {{ form_start(formComment) }}
+          {{ form_widget(formComment,{'attr':{'label':'Votre commentaire'}}) }}
+          {{ form_end(formComment) }}
+        </div>
+        <div class="comment">
+          {% if picture.comments %}
+          <ul class="collection">
+            {% for comment in picture.comments %}
+            <li class="collection-item avatar">
+              {% if comment.user is null %}
+              <img src="{{ asset('uploads/images/avatarVisiteur.jpg') }}" alt="" class="circle">
+              <span class="title">Visiteur</span>
+              {% else %}
+              <img src="{{ asset('uploads/images/'~ comment.user.avatar) }}" alt=""
+              class="circle">
+              <span class="title">{{ comment.user.username }}</span>
+              {% endif %}
+              <p> {{ comment.content }}<br>
+                <em style="font-size: .7em">{{ comment.date | date('d-m-y') }} </em>
+              </p>
+              <a href="#" class="secondary-content"><i class="material-icons">favorite</i></a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+        </div>
+
+      </div>
 
     </div>
+
+    <canvas id="canvas"></canvas>
+
+    <button type="button" id="imageConvert">Push me</button>
+    <button type="button" class="hidden" id="grayConvert">Gray</button>
+    <button type="button" class="hidden" id="sepiaConvert">Sepia</button>
+
+
+  {% endblock %}
+  {% block javascripts %}
+
+  <script  type="text/javascript">
+  $("#imageConvert").on("click",(event) => {
+    var image = document.getElementById("canvasPic");
+
+      $("#grayConvert").toggleClass("hidden");
+      $("#sepiaConvert").toggleClass("hidden");
+      var canvas = document.querySelector("#canvas");
+      var ctx = canvas.getContext("2d");
+      console.log(canvas);
+      canvas.setAttribute('width', image.width);
+      canvas.setAttribute('height', image.height);
+
+      ctx.drawImage(image, 0, 0,);
+      var imageData=ctx.getImageData(0,0, image.width, image.height);
+
+}
+    );
+    $("#grayConvert").on("click",(event) => {
+      var image = document.getElementById("canvasPic");
+
+
+        var canvas = document.querySelector("#canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.setAttribute('width', image.width);
+        canvas.setAttribute('height', image.height);
+        ctx.filter = 'grayScale(80)';
+        ctx.drawImage(image, 0, 0,);
+        var imageData=ctx.getImageData(0,0, image.width, image.height);
+
+  }
+
+      );
+      $("#sepiaConvert").on("click",(event) => {
+        var image = document.getElementById("canvasPic");
+
+
+          var canvas = document.querySelector("#canvas");
+          var ctx = canvas.getContext("2d");
+          canvas.setAttribute('width', image.width);
+          canvas.setAttribute('height', image.height);
+          ctx.filter = 'sepia(80)';
+          ctx.drawImage(image, 0, 0,);
+          var imageData=ctx.getImageData(0,0, image.width, image.height);
+
+    }
+
+        );
+
+  </script>
+
 {% endblock %}

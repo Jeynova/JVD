@@ -17,6 +17,7 @@ class FileUploader
     private $params;
     private $targetDirectory;
     const UPLOAD_AVATAR = 0;
+    const UPLOAD_IMG = 1;
 
     public function __construct($targetDirectory,ParameterBagInterface $params)
     {
@@ -50,7 +51,21 @@ class FileUploader
     }
         break;
     case 1:
-        echo "i égal 1";
+    $filesystem = new Filesystem();
+    $folderURL = $this->params->get("images_directory");
+
+    if (!$filesystem->exists($folderURL."/".$name."/img")) {
+      try {
+        $filesystem->mkdir($folderURL."/".$name."/img", 0700);
+      } catch (IOExceptionInterface $exception) {
+        echo "An error occurred while creating your directory at ".$exception->getPath();
+      }
+    }
+    try {
+        $file->move($folderURL."/".$name."/img", $fileName);
+    } catch (FileException $e) {
+        // ... handle exception if something happens during file upload
+    }
         break;
     case 2:
         echo "i égal 2";

@@ -59,22 +59,23 @@ class Picture
      */
     private $album;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Like", mappedBy="picture")
-     */
-    private $likes;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="picture")
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Jaime", mappedBy="picture")
+     */
+    private $jaimes;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->album = new ArrayCollection();
-        $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->jaimes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,12 +170,12 @@ class Picture
 
     public function addTag(Tag $tag): self
     {
-//        if (!$this->tags->contains($tag)) {
-//            $this->tags[] = $tag;
-//        }
-//
-//        return $this;
-        $tag->addPicture($this);
+       if (!$this->tags->contains($tag)) {
+           $this->tags[] = $tag;
+       }
+
+       return $this;
+        //$tag->addPicture($this);
     }
 
     public function removeTag(Tag $tag): self
@@ -212,36 +213,8 @@ class Picture
         return $this;
     }
 
-    /**
-     * @return Collection|Like[]
-     */
-    public function getLikes(): Collection
-    {
-        return $this->likes;
-    }
 
-    public function addLike(Like $like): self
-    {
-        if (!$this->likes->contains($like)) {
-            $this->likes[] = $like;
-            $like->setPicture($this);
-        }
 
-        return $this;
-    }
-
-    public function removeLike(Like $like): self
-    {
-        if ($this->likes->contains($like)) {
-            $this->likes->removeElement($like);
-            // set the owning side to null (unless already changed)
-            if ($like->getPicture() === $this) {
-                $like->setPicture(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Comment[]
@@ -278,5 +251,36 @@ class Picture
         return $this->image;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * @return Collection|Jaime[]
+     */
+    public function getJaimes(): Collection
+    {
+        return $this->jaimes;
+    }
+
+    public function addJaime(Jaime $jaime): self
+    {
+        if (!$this->jaimes->contains($jaime)) {
+            $this->jaimes[] = $jaime;
+            $jaime->setPicture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJaime(Jaime $jaime): self
+    {
+        if ($this->jaimes->contains($jaime)) {
+            $this->jaimes->removeElement($jaime);
+            // set the owning side to null (unless already changed)
+            if ($jaime->getPicture() === $this) {
+                $jaime->setPicture(null);
+            }
+        }
+
+        return $this;
     }
 }
