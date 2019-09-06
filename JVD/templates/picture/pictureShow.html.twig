@@ -4,10 +4,17 @@
 <style media="screen">
 
 
-canvas {
-  max-width: 100% !important;
-  height: auto !important;
+#image,#myCanvas{
+  float:left;
 }
+
+#blur,#grayscale,#brightness,#contrast,#rotate,#invert,#opacity,#saturate,#sepia{
+    width: 300px;
+    margin: 15px;
+   float:left;
+
+ }
+
 </style>
 
 {% endblock %}
@@ -16,10 +23,31 @@ canvas {
 
 <div class="row divShow">
   <div class="col s12 m12 l8 showImage ">
-    <img class="responsive-img" id="canvasPic" src="{{ picture.image }}" alt="{{ picture.name }}">
-    <a href="{{ path('tag_new', {'id': picture.id}) }}">Ajouter tag</a>
+    <img class="responsive-img" style= "max-width:440px; max-height:320px;" id="canvasPic" src="{{ picture.image }}" alt="{{ picture.name }}">
+    <!-- <canvas style= "max-width:440px; max-height:320px;" id="canvas" class="hidden"></canvas>
+
+    <button type="button" id="imageConvert">Push me</button> -->
+    <!-- <button type="button" class="hidden" id="grayConvert">Gray</button> -->
+
+
+  <div class="slide" style="display: flex !important;justify-content: space-around; ">
+    <div id="blur"><br>Blur</div>
+    <div id="grayscale"><br>Grayscale</div>
+    <div id="brightness"><br>brightness</div>
+    <div id="contrast"><br>contrast</div>
+    <div id="rotate"><br>huerotate</div>
+    <div id="invert"><br>invert</div>
+    <div id="opacity"><br>opacity</div>
+    <div id="saturate"><br>saturate</div>
+    <div id="sepia"><br>sepia</div>
+  </div>    <!-- <input type="range" min="1" max="100" value="0" class="slider hidden" id="myRange"> -->
+
+
+    <!-- <button type="button" class="hidden" id="sepiaConvert">Sepia</button> -->
+
 
   </div>
+  <a href="{{ path('tag_new', {'id': picture.id}) }}">Ajouter tag</a>
   <div class="col s12 m12 l4 showInfo">
     <div class="userInfo">
       <div class="row valign-wrapper">
@@ -77,64 +105,109 @@ canvas {
 
     </div>
 
-    <canvas id="canvas"></canvas>
 
-    <button type="button" id="imageConvert">Push me</button>
-    <button type="button" class="hidden" id="grayConvert">Gray</button>
-    <button type="button" class="hidden" id="sepiaConvert">Sepia</button>
 
 
   {% endblock %}
   {% block javascripts %}
 
   <script  type="text/javascript">
-  $("#imageConvert").on("click",(event) => {
-    var image = document.getElementById("canvasPic");
-
-      $("#grayConvert").toggleClass("hidden");
-      $("#sepiaConvert").toggleClass("hidden");
-      var canvas = document.querySelector("#canvas");
-      var ctx = canvas.getContext("2d");
-      console.log(canvas);
-      canvas.setAttribute('width', image.width);
-      canvas.setAttribute('height', image.height);
-
-      ctx.drawImage(image, 0, 0,);
-      var imageData=ctx.getImageData(0,0, image.width, image.height);
-
+  // var canvas = document.querySelector("#canvas");
+  // var ctx = canvas.getContext("2d");
+  function blur() {
+  var grayscale = $("#myRange").slider("value");
+  var blur = $("#blur").slider("value");
+  var grayscale = $("#grayscale").slider("value");
+  var brightness = $("#brightness").slider("value");
+  var contrast = $("#contrast").slider("value");
+  var rotate = $("#rotate").slider("value");
+  var invert = $("#invert").slider("value");
+  var opacity = $("#opacity").slider("value");
+  var saturate = $("#saturate").slider("value");
+  var sepia = $("#sepia").slider("value");
+  $("#canvasPic").css("-webkit-filter", "blur(" + blur + "px)" + "brightness(" + brightness + "%)" + "grayscale(" + grayscale + "%)" + "hue-rotate(" + rotate + "deg)" + "contrast(" + contrast + "%)" + "invert(" + invert + "%)" + "opacity(" + opacity + "%)" + "saturate(" + saturate + ")" + "sepia(" + sepia + "%)");
+  //$("#imageConvert").on("click",(event) => {
+  //var image = document.getElementById("canvasPic");
 }
-    );
-    $("#grayConvert").on("click",(event) => {
-      var image = document.getElementById("canvasPic");
+  $(function() {
+  $("#blur").slider({
+    orientation: "horizontal",
+    min: 0,
+    max: 25,
+    value: 0,
+    slide: blur,
+    change: blur
+  });
+  $("#grayscale").slider({
+    orientation: "horizontal",
+    min: 0,
+    max: 100,
+    value: 0,
+    slide: blur,
+    change: blur
+  });
+  $("#brightness").slider({
+    orientation: "horizontal",
+    min: 100,
+    max: 1000,
+    value: 0,
+    slide: blur,
+    change: blur
+  });
 
+  $("#contrast").slider({
+    orientation: "horizontal",
+    min: 0,
+    max: 1000,
+    value: 100,
+    slide: blur,
+    change: blur
+  });
+  $("#rotate").slider({
+    orientation: "horizontal",
+    min: -180,
+    max: 180,
+    value: 0,
+    slide: blur,
+    change: blur
+  });
 
-        var canvas = document.querySelector("#canvas");
-        var ctx = canvas.getContext("2d");
-        canvas.setAttribute('width', image.width);
-        canvas.setAttribute('height', image.height);
-        ctx.filter = 'grayScale(80)';
-        ctx.drawImage(image, 0, 0,);
-        var imageData=ctx.getImageData(0,0, image.width, image.height);
+  $("#saturate").slider({
+    orientation: "horizontal",
+    min: 0,
+    max: 100,
+    value: 1,
+    slide: blur,
+    change: blur
+  });
 
-  }
+  $("#sepia").slider({
+    orientation: "horizontal",
+    min: 0,
+    max: 100,
+    value: 0,
+    slide: blur,
+    change: blur
+  });
 
-      );
-      $("#sepiaConvert").on("click",(event) => {
-        var image = document.getElementById("canvasPic");
+  $("#opacity").slider({
+    orientation: "horizontal",
+    min: 0,
+    max: 100,
+    value: 100,
+    slide: blur,
+    change: blur
+  });
 
-
-          var canvas = document.querySelector("#canvas");
-          var ctx = canvas.getContext("2d");
-          canvas.setAttribute('width', image.width);
-          canvas.setAttribute('height', image.height);
-          ctx.filter = 'sepia(80)';
-          ctx.drawImage(image, 0, 0,);
-          var imageData=ctx.getImageData(0,0, image.width, image.height);
-
-    }
-
-        );
-
+  $("#invert").slider({
+    orientation: "horizontal",
+    min: 0,
+    max: 100,
+    value: 0,
+    slide: blur,
+    change: blur
+  });
+});
   </script>
 
 {% endblock %}
