@@ -62,7 +62,7 @@ public function __construct(UserPasswordEncoderInterface $passwordEncoder)
         for ($i=0; $i <=25; $i++) {
 
             //$tabId[]=$a[$i]->getId();
-
+            $pass="123456";
             $user = new User();
             $user->setUsername($faker->firstName)
                 ->setCountry($faker->countryCode)
@@ -72,7 +72,7 @@ public function __construct(UserPasswordEncoderInterface $passwordEncoder)
                 ->setPassword(
                   $this->passwordEncoder->encodePassword(
                     $user,
-                    "123456"
+                    $pass
                     )
                   );
                   $manager->persist($user);
