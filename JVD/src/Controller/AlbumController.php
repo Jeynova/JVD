@@ -7,11 +7,18 @@ use App\Form\AlbumType;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Repository\AlbumRepository;
+use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
 
 /**
  * @Route("/album")
@@ -97,5 +104,41 @@ class AlbumController extends AbstractController
         }
 
         return $this->redirectToRoute('album_index');
+    }
+
+
+    /**
+     * @Route("/ajax", name="album_ajax",methods={"GET","POST"})
+     */
+    public function ajaxAlbumPicture(Request $request,AlbumRepository $albumRepository, PictureRepository $pictureRepository){
+      $albumId =$request->request->get("id");
+      $pictureId =$request->request->get("picture");
+      $albumTitle =$request->request->get("title");
+
+      $album = $albumRepository -> find($albumId);
+      //$picture =  $album->getPictures();
+      $pictures = $album->getPictures();
+      $pic = $pictureRepository->find($pictureId);
+      $match = $pictureRepository->findOneByAlbum($pictureId,$albumId);
+        if ($match) {
+          $this->addFlash(
+            'notice',
+            'This picture is already in your album.'
+        );
+        }
+        else {
+          $album->addPicture($pic);
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->persist($album);
+          $entityManager->flush();
+          return $this->redirectToRoute('album_index');
+        }
+
+        //return $this->redirectToRoute('album_index');
+
+
+        return new JsonResponse("coucou");
+
+
     }
 }

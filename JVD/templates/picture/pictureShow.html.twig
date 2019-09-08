@@ -104,8 +104,46 @@
       </div>
 
     </div>
+<div class="">
+  {% if app.user.albums %}
+
+<button type="button" data-target="modal1" class="btn modal-trigger" name="modalAlbum">Ajouter à un album</button>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <select name="AlbumsList" id="select" class="browser-default">
+
+      {% for album in app.user.albums %}
 
 
+ <option value="{{ album.id }}" data-picture="{{ picture.id }}">{{ album.title }}</option>
+
+
+      {% endfor %}
+
+</select>
+    </div>
+    <div class="modal-footer">
+      {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+      {% endfor %}
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="addAlbum">Agree</a>
+    </div>
+  </div>
+  {% endif %}
+
+
+</div>
+<div class="">
+  {% for album in app.user.albums %}
+
+    {% for pics in album.pictures %}
+      {% if not pics.id %} {% endif %}
+    {% endfor %}
+
+  {% endfor %}
+</div>
 
 
   {% endblock %}
@@ -115,7 +153,7 @@
   // var canvas = document.querySelector("#canvas");
   // var ctx = canvas.getContext("2d");
   function blur() {
-  var grayscale = $("#myRange").slider("value");
+
   var blur = $("#blur").slider("value");
   var grayscale = $("#grayscale").slider("value");
   var brightness = $("#brightness").slider("value");
@@ -208,6 +246,21 @@
     change: blur
   });
 });
+var elems = document.querySelectorAll('.modal');
+var instances = M.Modal.init(elems);
+$( "#addAlbum" ).click(function() {
+
+   var data=[
+     {name:"id",value:$( "#select option:selected" ).val()},
+     {name:"title",value:$( "#select option:selected" ).text()},
+     {name:"picture",value:$( "#select option:selected" ).data("picture")}
+   ];
+  $.post("{{ path('album_ajax')}}",data,function(string){
+    console.log(string);
+
+  });
+});
+
   </script>
 
 {% endblock %}

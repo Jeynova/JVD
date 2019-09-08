@@ -36,15 +36,17 @@ class PictureRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Picture
+
+    public function findOneByAlbum($idPicture,$idAlbum): ?Picture
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->join('p.album', 'a')
+            ->where('p.id = ?1')
+            ->andWhere('a.id = ?2 ')
+            ->setParameters(array(1 => $idPicture, 2 => $idAlbum))
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }

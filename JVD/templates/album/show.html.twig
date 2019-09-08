@@ -27,4 +27,15 @@
     <a href="{{ path('album_edit', {'id': album.id}) }}">edit</a>
 
     {{ include('album/_delete_form.html.twig') }}
+
+    <div id="columns">
+        {% for picture in album.pictures %}
+
+                <figure>
+                    <a href="{{ path('picture_show', {'id': picture.id}) }}">  <img src="{{picture.image}}"></a>
+                    <figcaption>{{ picture.title }}</figcaption>
+                </figure>
+
+        {% endfor %}
+    </div>
 {% endblock %}
